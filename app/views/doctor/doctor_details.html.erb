@@ -1,0 +1,287 @@
+<script type="text/javascript">
+	var active_profile = "1";
+	
+	function show_doctor_profile(doctor_profile_to_be_shown){
+	  $(".doctor_profile_misc_class").each(function(){
+	  	if(this.id != doctor_profile_to_be_shown) {
+		  $("#"+this.id).slideUp(500);
+		}else{
+		  $("#"+this.id).slideDown(1000);
+		}
+	  })
+	}
+
+  $(document).ready(function(){
+	$('#slider2')
+	.anythingSlider({
+		resizeContents      : false,
+		autoPlay            : false	
+      });
+  });
+
+  	function slide_jump_function(profile_id){
+	  active_profile = profile_id;
+      $('#slider2').anythingSlider(profile_id);
+      return false;
+  	}
+
+	function prepare_for_print(true_false){
+		//Copy the HTML contents of the Doctor's profile to be printed. 
+		var active_profile_html = $('#doctor_profile_'+active_profile).html();
+		
+		//Since the printing is not working properly with the Slider, display-none the slider div
+		document.getElementById('slider2_div').style.display="none";
+		
+		//Paste the contents of the copied active Doctor's profile into a seperate div, active_profile_content_html.
+		document.getElementById('active_profile_content_html').innerHTML=''+active_profile_html+'';
+		
+		//Display-none the print button and the Doctor's Name list in the top
+	  	document.getElementById('print_button').style.display = "none";
+	  	document.getElementById('doctor_names_div').style.display = "none";
+		
+		window.print();
+
+		/*This alert is just to confirm the replace of the display-none contents back to display-inline after the print command is issued
+		 * and also to empty the seperate div, active_profile_content_html.
+		 */ 
+		alert("Click this once the printing of the document is completed");
+	  	document.getElementById('print_button').style.display = "inline";
+	  	document.getElementById('doctor_names_div').style.display = "inline";
+		document.getElementById('slider2_div').style.display="inline";
+		document.getElementById('active_profile_content_html').innerHTML='';
+	}
+	
+</script>
+
+<table cellspacing=0 cellpadding=0 border=0 width=100%>
+    <tr><td align="center" style="padding-top:30px;padding-bottom:25px;">
+	  <div id="doctor_names_div">
+	  	<input type="hidden" id="total_number_of_profiles" value="<%=@doctor_profiles.size%>">
+		  <%i=1%>
+		  <%for each_doctor in @doctor_profiles%>
+			  <span id="doctor_<%=i%>" class="doc_profile_name_list" onclick="slide_jump_function('<%=i%>');" style="cursor:pointer;" title="Click to View <%=each_doctor['general_profile'].full_name%>'s Profile">
+				<%=each_doctor["general_profile"].full_name%>
+			  </span>
+		    <%i = i+1%>
+		  <%end%>
+	  </div>
+	</td></tr>
+	<tr><td class="doctor_profile_hr">&nbsp;</td></tr>
+	<tr><td>
+	  <div id="active_profile_content_html"></div>
+      <!-- AnythingSlider #2 -->
+	  <div id="slider2_div">
+		  <ul id="slider2">
+	<!--		  <table> -->
+				<%i=1%>
+				<%for each_doctor in @doctor_profiles%>
+				  <%doctor_general_profile = each_doctor["general_profile"]%>
+				  <%doctor_professional_profile = each_doctor["professional_profile"]%>
+	<!--			  <tr>
+					<td> -->
+					  <li>
+						<div id="doctor_profile_<%=i%>" class="doctor_profile_misc_class" style="padding-left:30px;padding-right:40px;">
+	
+							<table style="font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:normal;font-size:8pt;border:1px;#000000;border-style:solid;border-spacing:10px;" border=0 width=100%>
+							  <tr><td align="center" colspan=2 class="doctor_profile_header">
+								<div style="font-weight:bold;vertical-align:middle;font-family:Garamond;font-size:24;color:#000000;">
+								  	Sri Sathya Sai Mobile Hospital<br>
+									Prasanthi Nilayam
+								</div>
+							  </td></tr>
+							  <tr><td width="670px">
+								<table class="" border=0 width=100% cellspacing="10px">
+								  <tr height="25">
+							  		<td colspan=2 valign="top" style="padding-top:5px;">
+									  <span class="doc_profile_name" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 16pt;font-weight: bold;">
+						  				<%=doctor_general_profile.full_name%> 
+									  </span><span class="doc_profile_general" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: normal;">(<%= doctor_general_profile.gender ? "M" : "F"%> / <%= doctor_general_profile.age%>) <br>
+									  <div style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;">
+								  		<%= doctor_general_profile.email%></br></br>
+									  </div>
+									</td>
+								</tr>
+								<tr height="25"><td valign="top">
+								  <span style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;font-weight: bold;">
+								  	Contact :<br>
+								  </span><br> 
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 10px;">
+									  <span class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<span>Mobile Number : </span><%= doctor_general_profile.contact_mob_no.blank? ? "<b><i>Not Mentioned</i></b>" :  doctor_general_profile.contact_mob_no %></br>
+									  </span><br> 
+									  <span class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<span>Home Number : </span><%= doctor_general_profile.contact_home_no.blank? ? "<b><i>Not Mentioned</i></b>" :  doctor_general_profile.contact_home_no %>
+									  </span>
+								  </div>
+								</td><td width=50% valign="top">
+								  <span class="doctor_profile_side_heading" style="padding-left:15px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+								  	Address :<br>
+								  </span><br> 
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 40px;">
+								  	 <%= doctor_general_profile.address.blank? ? "<b><i>Not Mentioned</i></b>" :  doctor_general_profile.address %></br>
+								  </div>
+								</td></tr>
+								<tr></tr>
+								<tr height="25"><td colspan=1 valign="top">
+								  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+								  	SSS Organization Member<br>
+								  </span></td><td> 
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+								    <%= doctor_general_profile.sss_org_association_details.blank? ? "<i>Not a SSS organization Member</i>" :  doctor_general_profile.sss_org_association_details %></br>
+								  </div>
+								</td></tr>
+								<tr height="25"><td colspan=1 valign="top">
+								  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+								  	Volunteer Activity<br>
+								  </span></td><td>
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+								  	<%= doctor_general_profile.volunteer_activity_details.blank? ? "<b><i>None</i></b>" :  doctor_general_profile.volunteer_activity_details %></br>
+								  </div>
+								</td></tr>
+								<tr height="25"><td colspan=1 valign="top">
+								  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+								  	Residing Distance from Puttaparthi
+								  </span></td><td> 
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+								    <%= doctor_general_profile.residing_disance_from_ptp.blank? ? "<b><i>Not Mentioned</i></b>" :  (doctor_general_profile.residing_disance_from_ptp.split("_").join(" to ")+" kms") %></br>
+								  </div>
+								</td></tr>
+								<tr height="25"><td colspan=1 valign="top">
+								  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+								  	Referred by a Doctor
+								  </span></td><td> 
+								  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+								   <%= doctor_general_profile.doctors_referral ? "Yes" :  "No" %></br>
+								  </span>
+								</td></tr>
+								<%if doctor_professional_profile%>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Designation/Employment
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									     <%= doctor_professional_profile.designation%></br>
+								      </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Specialization
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									    <%= doctor_professional_profile.get_specialization%></br>
+									  </dv>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Qualification
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									    <%= doctor_professional_profile.qualification%></br>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Institution Name
+									  </span></td><td>
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.institution_name%></br>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Type Of Practice
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.type_of_practice.split("_").map(&:capitalize).join(" ")%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Medical Registration Number
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.medical_registration_number%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Working Department
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.working_dept.blank? ? "<b><i>Not Mentioned</i></b>" : doctor_professional_profile.working_dept%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Years Of Experience
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.years_of_exp.split("_").join(" to ")+" years"%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Research
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.research_details.blank? ? "<b><i>Not Mentioned</i></b>" : doctor_professional_profile.research_details%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Special Training
+									  </span></td><td>
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.special_training_details.blank? ? "<b><i>Not Mentioned</i></b>" : doctor_professional_profile.special_training_details%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Special Confernce/Workshop
+									  </span></td><td>
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+									  	<%= doctor_professional_profile.special_conf_attended_details.blank? ? "<b><i>Not Mentioned</i></b>" : doctor_professional_profile.special_conf_attended_details%>
+									  </div>
+									</td></tr>
+									<tr height="25"><td colspan=1 valign="top">
+									  <span class="doctor_profile_side_heading" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight: bold;">
+									  	Own Clinic Details
+									  </span></td><td> 
+									  <div class="doctor_profile_left_pad" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;text-align: left;padding-left: 15px;">
+										  <%if  doctor_professional_profile.own_clinic_or_hospital%>
+										  	<b>Treatments Offered : </b><%=doctor_professional_profile.treatments_offered%><br>
+										  	<b>Equipments Available : </b><%=doctor_professional_profile.equipments_available%><br>
+										  	<b>Beds Count : </b><%=doctor_professional_profile.beds_count%>
+										  <%else%>
+										  	<b><i>Not Mentioned</i></b>
+										  <%end%>
+									  </div>
+									</td></tr>
+								<%end%>					
+								
+								</table>
+							  </td>
+							  <td align="center" valign="top">
+							    <img id="image_<%=doctor_general_profile.user_id%>" src="<%= url_for(:controller=>'account',:action=>'get_picture',:user_id=>doctor_general_profile.user_id)%>" width="150" height="160"/>
+							  </td>
+							</tr></table>
+						   
+						</div>
+					  </li>	
+	<!--				</td>
+				  </tr> -->
+				<%i = i+1%>  
+				<%end%>
+	<!--		  </table> -->
+		  </ul>
+	  </div>
+	  <!-- END AnythingSlider #2 -->
+	</td></tr>
+	<tr><td align="center">
+	   <div id="print_button"><input type="button" value="Print" onClick="prepare_for_print('true');"></div>
+	</td></tr>
+	<script type="text/javascript">
+	</script>
+</table>
+
+

@@ -1,0 +1,184 @@
+<script type="text/javascript">
+</script>
+
+  <table width=100% border=0 cellpadding=0 cellspacing=0 class="home_page_more_display_table" >
+	<tr>
+	  <td colspan=2>
+	    <img src="/images/home_folder/home_top.gif" border=0 usemap="#MAP_home_top_map_<%=div_id%>">
+	  </td>
+	  </tr>
+	  <tr class="home_page_main_display"><td style="padding-left:3px;"><div style="overflow-y:auto;height:250px;width:770px;">
+	  	<table border=0 cellpadding=0 cellspacing=0 >
+		  <tr class="home_page_more_display">
+			<td align="center" class="user_detail_td_class">
+				<b><%= user.full_name.capitalize%> (<%= user.gender ? "M" : "F"%>/<%= user.age%>)</b></br> 
+				<%= user.email%></br>Address:<div style="padding-left: 10px;"><%= user.address.nil? ? "--" : user.address%></div>
+			</td><td>
+			    <img src="<%= url_for(:controller=>'account',:action=>'get_picture',:user_id=>user.user_id)%>" width="55" height="50"/>
+			</td>
+		  </tr>
+		  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+		  <tr class="home_page_more_display">
+		    <td align="left" class="user_detail_td_class">
+			  SSS Organization Member 
+		    </td>
+			<td  width="500px">
+				<%= user.sss_org_association ? "" : "No"%>
+				<%= (user.sss_org_association_details.blank? ? "---" : user.sss_org_association_details) if user.sss_org_association%> 
+			</td>
+		  </tr>
+		  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+		  <tr class="home_page_more_display">
+		    <td class="user_detail_td_class">
+			  Volunteer Activity 
+		    </td>
+			<td >
+				<%= user.volunteer_activity ? "" : "No"%>
+				<%= (user.volunteer_activity_details.blank? ? "---" : user.volunteer_activity_details) if user.volunteer_activity%> 
+			</td>
+		  </tr>
+		  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+		  <tr class="home_page_more_display">
+		    <td align="left" class="user_detail_td_class" colspan=2>
+		      <table><tr>
+		      	<td>
+				  Residing Distance from Puttaparthi  : 
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.residing_disance_from_ptp.blank? ? "Not Mentioned" : (user.residing_disance_from_ptp.split("_").join(" to ")+" kms")%>
+		        </td>
+			    <td align="left" class="user_detail_td_class">
+				  &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; Referred by a Doctor  :
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.doctors_referral ? "Yes" : "No"%>
+			    </td>
+			  </tr></table>
+		    </td>
+		  </tr>
+		  <%if user_professional_detail%>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td class="user_detail_td_class">
+				  Designation/Employment :
+			    </td>
+				<td align="left" style="padding-left:20px;">
+					<%= user_professional_detail.designation%>
+				</td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Specialization  : 
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.get_specialization %>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Qualification  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.qualification%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Institution Name  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.institution_name%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Type Of Practice  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.type_of_practice.split("_").map(&:capitalize).join(" ")%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Medical Registration Number  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.medical_registration_number%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Working Department  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.working_dept%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Years Of Experience  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%= user_professional_detail.years_of_exp.split("_").join(" to ")+" years"%>
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Research  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+					<%= user_professional_detail.research_interest ? "" : "No"%>
+					<%= (user_professional_detail.research_details.blank? ? "---" : user_professional_detail.research_details) if user_professional_detail.research_interest%> 
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Special Training   :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+					<%= user_professional_detail.special_training ? "" : "No"%>
+					<%= (user_professional_detail.special_training_details.blank? ? "---" : user_professional_detail.special_training_details) if user_professional_detail.special_training%> 
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Special Confernce/Workshop  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+					<%= user_professional_detail.special_conf_attended ? "" : "No"%>
+					<%= (user_professional_detail.special_conf_attended_details.blank? ? "---" : user_professional_detail.special_conf_attended_details) if user_professional_detail.special_conf_attended%> 
+			    </td>
+			  </tr>
+			  <tr><td colspan=2 height="1px;"><img src="/images/home_folder/home_row_border_half.gif" border=0></td></tr>
+			  <tr class="home_page_more_display">
+			    <td align="left" class="user_detail_td_class">
+					  Own Clinic Details  :
+			    </td>
+			    <td align="left" class="user_detail_td_class">
+				  <%if  user_professional_detail.own_clinic_or_hospital%>
+				  	<b>Treatments Offered : </b><%=user_professional_detail.treatments_offered%><br>
+				  	<b>Equipments Available : </b><%=user_professional_detail.equipments_available%><br>
+				  	<b>Beds Count : </b><%=user_professional_detail.beds_count%>
+				  <%else%>
+				  	No
+				  <%end%>
+			    </td>
+			  </tr>
+		  <%end%>
+	  		
+	  	</table>
+	</div></td></tr>
+	  <tr><td colspan=2>
+		<img src="/images/home_folder/home_bottom.gif" border=0>
+	  </td></tr>
+    </table>
+
+<map name="MAP_home_top_map_<%=div_id%>">
+	<area shape="rect" coords="745,0,775,30" title="Close" onclick="take_up_details('<%=div_id%>');" onmouseover="this.style.cursor='pointer';">
+</map>

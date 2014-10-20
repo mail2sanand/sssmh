@@ -1,0 +1,29 @@
+Hi <%=@user.first_name.capitalize%>,
+
+<br> Thank you for shopping at ECommerce on RoR Webste.<br>
+<br> Given below are the transaction details for your reference.<br>
+
+<table cellpadding="0" cellspacing="0">
+  <tr>
+    <td> Shopped for :</td>
+    <td> <%=@order.amount%></td>
+  </tr>
+  <tr>
+    <td> Transaction Reference :</td>
+    <td> <%=@purchase_invoice.reference%></td>
+  </tr>
+  <tr>
+    <td> Product Shipping Address :</td>
+    <td> <%=@order.shipping_address%></td>
+  </tr>
+  <tr>
+    <td> Billing Address :</td>
+    <td> <%=@order.billing_address%></td>
+  </tr>
+</table>
+
+<br> <a target=blank href="http://127.0.0.1:3001">Please click on this link to go to the website.</a>
+<br><br>
+
+Regards,<br>
+<b>RoR E-Commerce Team</b>

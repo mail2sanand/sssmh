@@ -1,0 +1,17 @@
+	<% remote_form_for(:user,user,:url=>{"action" => 'update_profile'},:html => {:id => "changed_edit_form",:method => :post, :multipart => true}) do |f| -%>
+	
+	  <table align="center" class="signup_table">
+	   <tr><td width=50%>
+	   	 <div id="account_fields_partial_div">
+		  <%=render :partial=>'/account/account_fields_partial',:locals=>{:f => f,:requirement_type=>"Edit"}%>
+		 </div>
+	   </td>
+	   <td>
+	   	 <div id="account_prof_details_partial_div">
+		  <%=render :partial=>'/account/account_prof_details_partial',:locals=>{:f => f,:requirement_type=>"Edit"}%>
+		 </div>
+	   </td></tr><tr><td>
+		  <%=render :partial=>'/account/submit_partial',:locals=>{:f => f,:requirement_type=>"Update My Profile"}%>
+	  </td></tr></table>
+	
+	<% end -%>

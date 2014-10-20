@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+options = {}
+optparse = OptionParser.new do |opts|
+  options[:environment] = 'development'
+  opts.on('-e NAME','--environment NAME'){ |value| 
+    options[:environment] = value
+  }
+  
+  options[:port] = 3000
+  opts.on('-p PORT','--port PORT'){ |port_val|
+    options[:port] = port_val
+  }
+end
+
+optparse.parse(ARGV) rescue nil
+ENVIRONMENT = options[:environment]
+PORT = options[:port]
+
+require 'win32/daemon'
+include Win32
+
+class Daemon
+  def service_main
+    require 'rubygems'
+#    require 'rubyw_helper'
+    
+#    stdout = File.join(File.dirname(__FILE__),'..','log',"#{ENVIRONMENT}.#{PORT}.stdout.log")
+#    stderr = File.join(File.dirname(__FILE__),'..','log',"#{ENVIRONMENT}.#{PORT}.stderr.log")
+#    stdin = (/mswin/ =~ RUBY_PLATFORM) ? 'NUL:' : '/dev/null'
+    
+#    RubywHelper.new(stdout,stderr,stdin).with_redirection do
+      #From script/server
+      require File.dirname(__FILE__)+'/../config/boot'
+      require 'commands/server'
+#    end
+    
+  end
+
+  def service_stop
+    exit!
+  end
+  
+end
+
+Daemon.mainloop
+

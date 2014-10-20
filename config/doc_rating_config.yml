@@ -1,0 +1,73 @@
+doctors_qualification:
+  weightage: 20
+  mbs: 1
+  pg_diploma: 2
+  md: 3
+  ms: 3
+  dnb: 4
+  dnb_pg: 4
+  dm: 5
+  mch: 5
+  dnb_superspecialization: 6
+  max: 6
+  
+qualification_from_which_institution:
+  weightage: 10
+  other_than_aims: 3
+  aims: 5
+  max: 5
+  
+years_of_experience:
+  weightage: 20
+  0_5: 1
+  5_10: 2
+  10_15: 3
+  15_20: 4
+  20_30: 5
+  max: 5
+  
+type_of_practice:
+  weightage: 10
+  ngo: 3
+  private_practice: 3
+  govt_practice: 4
+  medical_faculty: 5
+  max: 5
+  
+research_interest:
+  weightage: 5
+  no: 1
+  yes: 5
+  max: 5
+  
+voluntary_medical_activity_in_24_months:
+  weightage: 10
+  no: 1
+  yes: 5
+  max: 5
+  
+own_a_hospital:
+  weightage: 10
+  no: 1
+  yes: 5
+  max: 5
+  
+residing_distance_from_puttaparthi:
+  weightage: 10
+  650_800: 1
+  500_650: 2
+  350_500: 3
+  200_350: 4
+  0_200: 5
+  max: 5
+  
+referred_by_existing_doctor:
+  weightage: 5
+  no: 1
+  yes: 5
+  max: 5
+  
+reject_crieteria:
+  age: 55
+  distance_from_puttaparthy: 800
+

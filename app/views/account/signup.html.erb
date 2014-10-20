@@ -1,0 +1,22 @@
+<% content_for("head") do %>
+  <script type="text/javascript">
+  </script>
+<%end%>
+
+
+<div id="signup_tabs">
+	<ul>
+		<li><a href="#doctor_signup">Doctor Signup</a></li>
+		<li><a href="#volunteer_signup">Volunteer Signup</a></li>
+	</ul>
+	<div id="doctor_signup" align="center" class="home_tabs_class">
+		<%= render :partial => '/account/doctor_signup_partial'%>
+	</div>
+		
+	<div id="volunteer_signup"  class="home_tabs_class">
+		<%= render :partial => '/account/volunteer_signup_partial'%>
+	</div>
+	
+</div>	
+	
+

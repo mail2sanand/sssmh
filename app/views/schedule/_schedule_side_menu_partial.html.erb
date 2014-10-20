@@ -1,0 +1,33 @@
+					<table align="left" border=0 cellpadding=0 cellspacing=0>
+						<tr>
+							<td id="schedule_inside_first_td" class="schedule_inside_active_tab" onmouseover="this.style.cursor='pointer';schedule_mouse_over(this.id);" onmouseout="schedule_mouse_out(this.id);">
+							  <div id="schedule_inside_first_td_div" onclick="schedule_a_programe(this.id,'index');">
+								  <input type="hidden" id="schedule_active_tab" value="schedule_inside_first_td"/>
+								  All Schedules
+							  </div>
+							</td>
+						</tr>
+					  <%if user_type == 1%>
+						<tr>
+							<td id="schedule_inside_third_td" class="schedule_inside_inactive_tab" onmouseover="this.style.cursor='pointer';schedule_mouse_over(this.id);" onmouseout="schedule_mouse_out(this.id);">
+							  <div id="schedule_inside_third_td_div" onclick="schedule_a_programe(this.id,'schedule_config');">
+							  	  Schedule Configuration
+							  </div>
+							</td>
+						</tr>
+						<tr>
+							<td id="schedule_inside_second_td" class="schedule_inside_inactive_tab" onmouseover="this.style.cursor='pointer';schedule_mouse_over(this.id);" onmouseout="schedule_mouse_out(this.id);">
+							  <div id="schedule_inside_second_td_div" onclick="schedule_a_programe(this.id,'schedule_a_programme');">
+							  	  Schedule a Programme
+							  </div>
+							</td>
+						</tr>
+						<tr>
+							<td id="schedule_inside_fourth_td" class="schedule_inside_inactive_tab" onmouseover="this.style.cursor='pointer';schedule_mouse_over(this.id);" onmouseout="schedule_mouse_out(this.id);">
+							  <div id="schedule_inside_fourth_td_div" onclick="schedule_a_programe(this.id,'schedule_management');">
+							  	  Schedule Management
+							  </div>
+							</td>
+						</tr>
+					  <%end%>
+					</table>

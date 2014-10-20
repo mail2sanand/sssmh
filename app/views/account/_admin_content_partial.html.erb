@@ -1,0 +1,23 @@
+	<div id="tabs">
+		<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="/schedule/index">Schedule</a></li>
+			<li><a href="/doctor/index">Doctors</a></li>
+		</ul>
+	  <div id="home">
+		<div align="left" class="side_headings" style="padding-left:20;padding-bottom:8;">Users Waiting for Approval</div>
+		<%if users_to_be_approved.size == 0%>
+			<div id="no_users_to_approve" class="signup_inside_table">There are no users to be approved</div>
+		<%else%>
+		    <div id="approved_users_div">
+		      <%= render :partial => 'account/admin_all_users_partial',:locals => {:user => users_to_be_approved, :to_be_approved => true}%></br></br>
+			</div>
+		
+			<div id="approve_reject_button_div">
+			  <br/><%= render :partial => 'account/approve_reject_button_partial',:locals => {:to_be_approved => true}%>
+			</div>
+		<%end%>
+	  </div>
+	  <div id="schedule_tab"></div>
+	  <div id="doctors_tab"></div>
+	</div>

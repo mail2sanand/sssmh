@@ -1,0 +1,146 @@
+<script type="text/javascript">
+	  $(function() {
+		
+		$("#accordion_tabs").accordion({
+			autoHeight: false,
+			navigation: true
+		});
+
+	  });
+
+</script>
+
+	<table border=0 cellpadding=0 cellspacing=0 class="" align="right">
+		<tr>
+			<td valign="top" width="165">
+				<%if @partial.nil?%>
+				  <%= render :partial => '/schedule/schedule_side_menu_partial', :locals=>{:user_type => @user_type}%>
+				<%end%>
+			</td>
+			<td class="schedule_update_td" id="" colspan=5 valign="top">
+
+			<!-- This is the Ajax Loading table block -->
+			<div id="ajax_loading_block" style="display:none;">
+			  <table width=100% border=0 cellpadding=0 cellspacing=0 class="schedule_main_update_table">
+			  	<tr>
+			  		<td colspan=6>
+			  			<img src="/images/schedule_table_top_grey.gif" border=0 width="800px">
+			  		</td>
+				</tr>
+				<tr class="schedule_tr_1"> 
+					<td colspan=6 height="430">
+					  <img src="/images/ajax-loader-3.gif" border=0>&nbsp;
+					</td>
+				</tr>
+			  	<tr>
+			  		<td colspan=6 width="800px">
+			  			<img src="/images/schedule_table_bottom_grey.gif" border=0 width="800px">
+			  		</td>
+				</tr>
+			  </table>
+			 </div>
+			<!-- Till Here -->
+			 
+
+			<!-- This is the startof the All Schedules div  -->
+			
+			  <div id="all_schedules_update_div">
+				 
+				<!-- This is the Active Schedules Block -->
+				<div id="schedule_update_div">
+				  <table width=100% border=0 cellpadding=0 cellspacing=0 class="schedule_main_update_table">
+				  	<tr>
+				  		<td colspan=6>
+				  			<img src="/images/schedule_table_top_grey.gif" border=0 width="800px">
+				  		</td>
+					</tr>
+					<tr class="schedule_tr_1">
+						<td colspan=6>
+							<div class="all_schedule_class">All Active Schedules</div> 
+							<div id="all_schedules_message" style="display:none;"></div>
+						</td>
+					</tr>
+					<tr class="schedule_tr_1" height="30px;">
+						<th width="80px" style="padding-left:10px;">Programme Name</th>
+						<th width="200px">Place of Programe</th>
+						<th width="100px">Start Date</th>
+						<th width="100px">End Date</th>
+						<th width="200px">Specializations</th>
+						<%if @user_type != 1%>
+							<th width="50px" style="padding-right:20px;">Volunteer</th>
+						<%else%>
+							<th width="50px" style="padding-right:20px;">View Volunteers</th>
+						<%end%>
+					</tr>
+					
+					<%if @active_schedules.size != 0 %>
+					  <%= render 	:partial => "display_schedules_partial", 
+									:locals => {:schedules => @active_schedules,:schedule_type => 'active',:user_type => @user_type,:user_approved => @user_approved,:i => (@expired_schedules.size + 2)}%>    
+					<%else%>
+					  <tr class="schedule_tr_1">
+					  	<td colspan=6></br>
+						  <div id="all_schedules">No Schedules</div>
+					  	</td>
+					  </tr>
+					<%end%>
+				  	<tr>
+				  		<td colspan=6 width="800px">
+				  			<img src="/images/schedule_table_bottom_grey.gif" border=0 width="800px">
+				  		</td>
+					</tr>
+				  </table>
+				</div>
+				
+
+				<!-- This is the startof the Expired Schedules div  -->
+
+				<div class="side_headings" align="right" style="padding-left:20;padding-bottom:8;" id="expired_schedule_trigger" onclick="$('#all_expired_schedules').slideToggle(1000);" align="left" onmouseover="this.style.cursor='pointer';" title="Click for list of Expired Schedules">
+					Expired Schedules
+				</div>
+					
+				<div id="all_expired_schedules" style="display:none;">
+				  <table width=100% border=0 cellpadding=0 cellspacing=0 class="schedule_main_update_table">
+				  	<tr>
+				  		<td colspan=6>
+				  			<img src="/images/schedule_table_top_grey.gif" border=0 width="800px">
+				  		</td>
+					</tr>
+					<tr class="schedule_tr_1">
+						<td colspan=6>
+							<div class="all_schedule_class">All Expired Schedules</div> 
+							<div id="all_schedules_message" style="display:none;"></div>
+						</td>
+					</tr>
+					<tr class="schedule_tr_1" style="padding-bottom:35px;" height="45px;">
+						<th width="80px" style="padding-left:10px;">Programme Name</th>
+						<th width="200px">Place of Programe</th>
+						<th width="100px">Start Date</th>
+						<th width="100px">End Date</th>
+						<th width="200px">Specializations</th>
+						<%if @user_type != 1%>
+							<th width="50px" style="padding-right:20px;">Volunteer</th>
+						<%else%>
+							<th width="50px" style="padding-right:20px;">View Volunteers</th>
+						<%end%>
+					</tr>
+					
+					  <%if @expired_schedules.size != 0 %>
+						  <%= render :partial => "display_schedules_partial", 
+									 :locals => {:schedules => @expired_schedules,:schedule_type => 'expired',:user_type => @user_type,:user_approved => @user_approved,:i => 2}%>    
+					  <%end%>
+
+				  	<tr>
+				  		<td colspan=6 width="800px">
+				  			<img src="/images/schedule_table_bottom_grey.gif" border=0 width="800px">
+				  		</td>
+					</tr>
+				  </table>
+				</div>
+				<!-- End of the Expired Schedules Div -->
+				
+			  </div>
+			</td>
+		</tr>
+	</table>
+	
+

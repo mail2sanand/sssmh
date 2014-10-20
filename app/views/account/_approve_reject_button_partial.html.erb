@@ -1,0 +1,79 @@
+<script type="text/javascript">
+
+/*
+  		$.ajaxSetup({
+		  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept","text/javascript")}
+		});
+ */
+
+    $(document).ready(function() {
+		$("#approve_button").click(function() {
+		  var i = 0;
+		  var j = 0;
+	  	  var approved_users = [];
+
+		  $("input[type=checkbox].approve_checkbox_class").each(
+			function(){
+			  if($(this).is(':checked')){
+			    approved_users[i] = $(this).attr('value');
+			    i = i+1;
+			  }
+		    }
+          )
+		  $("#approved_users_div").slideUp(500);
+
+  		$.post('approve_user', {'users_to_be_approved[]':approved_users},
+		  function(script){
+		  },"script"
+		);
+    })
+	
+		$("#reject_button").click(function() {
+		  var i = 0;
+		  var j = 0;
+		  var rejected_users = [];
+
+		  $("input[type=checkbox].reject_checkbox_class").each(
+			function(){
+			  if($(this).is(':checked')){
+			    rejected_users[j] = $(this).attr('value');
+			    j = j+1;
+			  }
+		    }
+          )
+		  $("#unapproved_users_div").slideUp(500);
+
+  		$.post('approve_user', {'users_to_be_rejected[]':rejected_users},
+		  function(script){
+		  },"script"
+		);
+    })
+	
+	$("#print_docs_button").click(function(){
+	  	var j = 0;
+	  	var docs_to_be_printed = [];
+		  
+	    $("input[type=checkbox].reject_checkbox_class").each(function(){
+		  	if($(this).is(':checked')){
+			    docs_to_be_printed[j] = $(this).attr('value');
+			    j = j+1;
+			}
+		})
+		
+		window.open('/doctor/doctor_details?docs_to_be_printed='+docs_to_be_printed,'Doctor Profiles');
+
+	})
+		
+  })
+</script>
+
+
+<input type="hidden" value="<%= to_be_approved%>" id="to_be_approved">
+
+<%if to_be_approved%>
+	<input type="button" id="approve_button" class="approve_reject_button_class" value="Approve Selected Users"/>
+<%else%>
+	<input type="button" id="reject_button" class="approve_reject_button_class" value="Reject Selected Users"/>
+	<input type="button" id="print_docs_button" class="print_docs_class" value="Print Doctor Profiles">
+<%end%>
+

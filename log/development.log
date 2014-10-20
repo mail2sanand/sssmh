@@ -1,0 +1,68 @@
+# Logfile created on Thu Feb 24 12:34:35 +0530 2011  [4;36;1mSQL (163.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2011-02-24 12:34:40) [GET]
+Rendering template within layouts/ms_project_layout
+Rendering home/index
+Rendered home/_home_page_main_partial (270.0ms)
+Rendered home/_home_page_partial (288.0ms)
+Completed in 7799ms (View: 7794, DB: 163) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#about_us (for 127.0.0.1 at 2011-02-24 12:34:58) [GET]
+Rendering home/about_us
+Completed in 40ms (View: 35, DB: 0) | 200 OK [http://localhost/home/about_us]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100522095845)
+Migrating to CreateUserProfessionalDetails (20100522105541)
+Migrating to CreateRoles (20100524144235)
+Migrating to CreateAssets (20100529192144)
+Migrating to CreateLocations (20100604120120)
+Migrating to CreateSchedules (20100610194858)
+Migrating to CreateSpecializations (20100613085027)
+Migrating to CreateUserSchedules (20100625192812)
+Migrating to AddInvitedToUserSchedules (20100629203510)
+Migrating to CreateUserRatings (20100730073058)
+Migrating to AddApprovedColToUserScheduled (20100802053551)
+Migrating to UploadCertificateInUserProfDetail (20100810131214)
+Migrating to AddDocCertToUsrPrfDetail (20100811071325)
+Migrating to ChangeYearsOfExpType (20100811121701)
+Migrating to CreateNewsletters (20120608073058)
+  [4;35;1mSQL (118.9ms)[0m   [0mCREATE TABLE `newsletters` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `newsletter_path` varchar(255), `year` varchar(255), `month` varchar(255), `volume` varchar(255), `issue` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20120608073058')[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSHOW FIELDS FROM `assets`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mdescribe `assets`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mSHOW KEYS FROM `assets`[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSHOW FIELDS FROM `locations`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mdescribe `locations`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW KEYS FROM `locations`[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSHOW FIELDS FROM `newsletters`[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mdescribe `newsletters`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSHOW KEYS FROM `newsletters`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW FIELDS FROM `schedules`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mdescribe `schedules`[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW KEYS FROM `schedules`[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSHOW FIELDS FROM `specializations`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mdescribe `specializations`[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSHOW KEYS FROM `specializations`[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mSHOW FIELDS FROM `user_professional_details`[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mdescribe `user_professional_details`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW KEYS FROM `user_professional_details`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW FIELDS FROM `user_ratings`[0m
+  [4;36;1mSQL (1.7ms)[0m   [0;1mdescribe `user_ratings`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW KEYS FROM `user_ratings`[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mSHOW FIELDS FROM `user_schedules`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mdescribe `user_schedules`[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSHOW KEYS FROM `user_schedules`[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW KEYS FROM `users`[0m

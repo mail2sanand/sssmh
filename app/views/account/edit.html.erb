@@ -1,0 +1,42 @@
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">My Profile</a></li>
+			<li><a href="#tabs-2">Change Password</a></li>
+		</ul>
+	<div id="tabs-1">
+		<div align="center" class="really_big">My Profile</br></br></div>
+		<div id="changed_edit_form_div">
+			<% remote_form_for(:user,@user,:html => {:id => "changed_edit_form",:method => :post, :multipart => true}) do |f| -%>
+			
+			  <table align="center" class="signup_table">
+			   <tr><td width=50%>
+			   	 <div id="account_fields_partial_div">
+				  <%=render :partial=>'/account/account_fields_partial',:locals=>{:f => f,:requirement_type=>"Edit"}%>
+				 </div>
+			   </td>
+			   <td>
+			   	 <div id="account_prof_details_partial_div">
+				  <%=render :partial=>'/account/account_prof_details_partial',:locals=>{:f => f,:requirement_type=>"Edit"}%>
+				 </div>
+			   </td></tr>
+			   <tr><td>
+				  <%=render :partial=>'/account/submit_partial',:locals=>{:f => f,:requirement_type=>"Update My Profile"}%>
+			  </td></tr></table>
+			
+			<% end -%>
+		
+		</div>
+	</div>
+	<div id="tabs-2">
+	  <table align="center">
+	   <tr><td width=50%>
+	   	 <div id="change_password_error_div" style="display:none;" class="change_password_subheading"></div>
+	   	 <div id="change_password_div">
+		  <%=render :partial=>'/account/change_password_partial'%>
+		 </div>
+	   </td>
+	  </tr>
+	 </table>
+	</div>	
+	

@@ -1,0 +1,34 @@
+<br/><br/><br/><br/><br/>
+<% form_tag do -%>
+<table align="center" valign="center" class="login_class" border=0>
+  <tr>
+    <td colspan="3"><IMG SRC="/images/login_top.gif"></td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <p><label for="login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login / Username</label><br/>
+    </td>
+    <td>
+	  <%= text_field_tag 'login' %></p>
+	</td>
+  </tr>
+  <tr>
+    <td>
+		<label for="password">Password</label><br/>
+    </td>
+    <td>
+		<%= password_field_tag 'password' %>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+	<p><label for="remember_me">Remember me:</label>
+	<%= check_box_tag 'remember_me' %></p>
+  </td></tr>
+  <tr><td colspan="2" align="center">
+	<%= submit_tag 'Log in' %></br>
+	<%=link_to "Sign Up:", :action=>"signup"%>
+  </td></tr>
+
+</td></tr></table>
+<% end -%>

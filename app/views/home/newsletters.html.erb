@@ -1,0 +1,45 @@
+<div id="newsletters_div" class="" style="min-height: 400px;">
+	<table cellpadding=0 cellspacing=0 border=0 style="min-height: 230px;">
+	  <tr>
+		<td width="762" valign="top">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	          <tr>
+	            <td>
+					<div id="newsletters_div" class="side_headings_big" style="padding-top: 5px;">Newsletter</div>
+				  <div style='font-family: "Trebuchet MS";color: #000000;padding-top: 7px;'  onmouseover="">
+				  	(Click on the links below to download the newsletters. For viewing the newsletters, you need Acrobat reader installed in your computer. 
+				  	Acrobat reader could be downloaded from <a href="http://get.adobe.com/reader/" style='color: #000000;font-size: 9pt;font-family:"Trebuchet MS"' target="_blank">here</a>)
+				  </div><br />
+				</td>
+			 </tr>
+	         <tr>
+	            <td valign="top">
+				  <%@yearwise_articles.each_pair do |year,articles|%>
+			      <div style="padding-left: 15px;" class="txtheader">
+			      	<strong><a name="specialities" id="specialities"></a>- <%=year%></strong>
+			      </div>
+			      <div style="padding-left: 30px;">
+			      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+			        <tr>
+			          <td colspan=2 valign="top" style="padding-top: 5px;padding-bottom: 12px;">
+						<%for each_newsletter in articles%>
+						 <div style="padding-top: 5px;">
+						 - &nbsp;
+						 <a class="newsletter_list_class" 
+						 	href="/home/download_newsletter?newsletter_name=<%=each_newsletter[:article_name]%>">
+						 	<%=each_newsletter[:article_name]%>
+						 </a>
+						</div>
+						<%end%>
+					  </td>
+			        </tr>
+			      </table></div>
+				 <%-end%>
+				</td>
+			  </tr>
+			</table>
+		</td>
+	  </tr>
+	</table>
+</div>
+

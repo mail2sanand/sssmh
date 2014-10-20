@@ -1,0 +1,196 @@
+<script type="text/javascript">
+	// execute your scripts when the DOM is ready. this is mostly a good habit
+	$(function() {
+	
+		// initialize scrollable
+		$(".scrollable").scrollable();
+	
+	});
+
+	$(".items img").click(function() {
+	
+		// see if same thumb is being clicked
+		if ($(this).hasClass("active")) { return; }
+	
+		// calclulate large image's URL based on the thumbnail URL (flickr specific)
+		var url = $(this).attr("src").replace("_t", "");
+	
+		// get handle to element that wraps the image and make it semi-transparent
+		var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+	
+		// the large image from www.flickr.com
+		var img = new Image();
+	
+	
+		// call this function after it's loaded
+		img.onload = function() {
+	
+			// make wrapper fully visible
+			wrap.fadeTo("fast", 1);
+	
+			// change the image
+			wrap.find("img").attr("src", url);
+	
+		};
+	
+		// begin loading the image from www.flickr.com
+		img.src = url;
+	
+		// activate item
+		$(".items img").removeClass("active");
+		$(this).addClass("active");
+	
+	// when page loads simulate a "click" on the first image
+	}).filter(":first").click();
+
+</script>
+
+<style type="text/css">
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+.scrollable {
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+	width: 660px;
+	height:150px;
+}
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accommodate scrollable items.
+	it's enough that you set width and height for the root element and
+	not for this element.
+*/
+.scrollable .items {
+	/* this cannot be too large */
+	width:20000em;
+	position:absolute;
+}
+
+/*
+	a single item. must be floated in horizontal scrolling.
+	typically, this element is the one that *you* will style
+	the most.
+*/
+.items div {
+	float:left;
+}
+
+#image_wrap {
+		/* dimensions */
+		width:677px;
+		margin:15px 0 15px 40px;
+		padding:15px 0;
+
+		/* centered */
+		text-align:center;
+
+		/* some "skinning" */
+		background-color:#efefef;
+		border:2px solid #fff;
+		outline:1px solid #ddd;
+		-moz-ouline-radius:4px;
+	}
+
+</style>
+
+<div id="image_wrap">
+	<!-- Initially the image is a simple 1x1 pixel transparent GIF -->
+     <img src="/images/home_folder/image_gallery/image01.jpg"/>
+</div>
+
+<!-- root element for scrollable -->
+<table border=0 cellpadding=0 cellspacing=0 ><tr>
+	<td align="center" valign="top">
+		<!-- "previous page" action -->
+		<a class="prev browse left"></a>
+	</td>
+	<td align="center">
+		<div class="scrollable" align="center">   
+		   <!-- root element for the items -->
+		   <div class="items">
+		   
+		      <!-- 1-5 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/image01.jpg" width="150" height="150"/>
+		         <img src="/images/home_folder/image_gallery/image02.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image03.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image04.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image05.jpg" width="150" height="150" />
+		      </div>
+		      
+		      <!-- 5-10 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/image06.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image07.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image08.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image09.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image10.jpg" width="150" height="150" />
+		      </div>
+		      
+		      <!-- 10-15 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/image11.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image12.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image13.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image14.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/image15.jpg" width="150" height="150" />
+		      </div>
+		      
+		      <!-- 16-20 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0525.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0526.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0527.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0528.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0529.jpg" width="150" height="150" />
+		      </div>
+
+		      <!-- 21-25 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0530.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0531.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/dentistry/IMG_0532.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0306.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0311.jpg" width="150" height="150" />
+		      </div>
+
+		      <!-- 26-30 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0316.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0317.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0321.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0324.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0326.jpg" width="150" height="150" />
+		      </div>
+
+		      <!-- 31-35 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0329.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0333.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0334.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0337.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0345.jpg" width="150" height="150" />
+		      </div>
+
+		      <!-- 36-40 -->
+		      <div>
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0350.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0356.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0358.jpg" width="150" height="150" />
+		         <img src="/images/home_folder/image_gallery/opthamologyAndENT/DSC_0364.jpg" width="150" height="150" />
+		      </div>
+
+		   </div>
+		   
+		</div>
+	</td>
+	<td align="center" valign="top">
+		<!-- "next page" action -->
+		<a class="next browse right"></a>
+	</td>
+	</tr></table>
+

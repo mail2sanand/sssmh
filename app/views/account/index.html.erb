@@ -1,0 +1,16 @@
+
+	<% content_for("head") do %>
+
+	<% end %>
+
+   	<% content_for("onload") do %><% end %>
+
+<div id="flash_notice"></div>
+
+<%if @user_type == 1%>
+    </br></br>
+	<%= render :partial => '/account/admin_content_partial', :locals => {:users_to_be_approved => @users_to_be_approved, :users => @users}%>
+<%else%>
+	<%= render :partial => '/account/general_content_partial', :locals => {:user_type => @user_type}%>
+<%end%>
+

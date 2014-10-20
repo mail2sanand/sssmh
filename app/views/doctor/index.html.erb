@@ -1,0 +1,17 @@
+	<div align="left" class="side_headings" style="padding-left:20;padding-bottom:8;">Doctors</div>
+	
+	<div id="flash_notice"></div>
+
+	<%if @approved_doctors.size == 0%>
+		<div id="no_users_to_approve" class="signup_inside_table">There are no approved doctors</div>
+	<%else%>
+	    <div id="unapproved_users_div">
+	      <%= render :partial => 'account/admin_all_users_partial',:locals => {:user => @approved_doctors, :to_be_approved => false}%></br></br>
+		</div>
+	
+		<div id="approve_reject_button_div">
+		  <br/><%= render :partial => 'account/approve_reject_button_partial',:locals => {:to_be_approved => false}%>
+		</div>
+	<%end%>
+
+	

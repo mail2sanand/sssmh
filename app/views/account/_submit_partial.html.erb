@@ -1,0 +1,6 @@
+	  <tr><td colspan="2" align="center">
+		<input type="submit" id="submit_button" value="<%=requirement_type%>" onclick="changed_submit_edit_form();">
+		<%if requirement_type=="Sign Up"%><br>
+			<b><%=link_to "Login :", :controller => "home"%></b>
+		<%end%>
+	  </td></tr>

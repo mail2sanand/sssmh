@@ -1,0 +1,22 @@
+$("#flash_notice").html('<%= escape_javascript(flash.delete(:notice))%>');
+$("#approved_users_div").html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => true, :user => @users_to_be_approved})%></br></br>").slideDown(1500);
+$("#unapproved_users_div").html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => false, :user => @users})%></br></br>").slideDown(1500);
+
+/*
+$("#approved_users_div").append("<div>PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</br>PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</br></div>").slideDown(2000);
+
+$("#approved_users_div").SlideDown(2000,function(){
+   $("#users_to_be_approved_table").html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => true, :user => @users_to_be_approved})%></br></br>Hi bosss tis is a good one .... :)")
+ });
+
+$("#users_to_be_approved_table").html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => true, :user => @users_to_be_approved})%></br></br>").parent().slideDown(2000);
+
+$("#users_to_be_approved_table").SlideDown("fast",function(){
+   $(this).html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => true, :user => @users_to_be_approved})%></br></br>")
+ });
+
+$("#users_to_be_approved_table").SlideDown("fast",function(){
+  $().html("<%= escape_javascript(render :partial => 'account/admin_all_users_partial',:locals => {:to_be_approved => true, :user => @users_to_be_approved})%>")
+});
+*/
+

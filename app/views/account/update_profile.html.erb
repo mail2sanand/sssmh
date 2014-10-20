@@ -1,0 +1,25 @@
+
+		<div id="sugnup_errors">
+			<%if !@overall_errors.empty?%>
+				<table cellpadding=0 cellspacing=0 border=0 class="signup_errors_table">
+					<tr>
+						<td width=50%  align="right" valign="top" style="padding-left:50px;">
+							<%= error_messages_for 	:user,
+													:header_tag => "h2",
+													:class => "signup_error_class"
+							%>
+						</td>
+						<td width=50%  align="center" valign="top" style="padding-left:50px;">
+							<%= error_messages_for 	:user_professional_detail,
+													:header_tag => "h2",
+													:class => "signup_error_class"
+							%>
+						</td>
+					</tr>
+				</table>
+			<%else%>
+				<div style="background-color:#FFFFFF;">Modifications are saved.</div>
+			<%end%>
+		</div><br>
+		
+  <%= render :partial => 'account/edit_form_partial',:locals => {:user => @user}%></br>

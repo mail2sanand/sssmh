@@ -1,0 +1,491 @@
+ 	var users_to_be_approved = "";
+	var about_programe_scroll_to = 0;
+
+
+/*		
+ *		$("#home_tabs > ul").tabs("select",1);
+ * 		$().ready(function(){ 
+			$("#home_tabs").triggertab(2);
+		}); 
+	}
+*/
+
+  	function bring_down_details(div_id)
+  	{
+		$("#"+div_id).slideDown("slow");
+  	}
+
+  	function take_up_details(div_id)
+  	{
+		$("#"+div_id).slideUp(1000);
+  	}
+
+	function approve_users(){
+	   new Ajax.Updater('tagresult', '/account/approve_user?user_to_be_approved='+tgid+'&sel_tag='+tg_id,
+	   {asynchronous:true, evalScripts:true,
+	   onLoading:function(request){Element.show('loading_image')},
+	   onComplete:function(request){check_for_tags(request);}}); return false;
+   	}
+	
+	function show_image(){
+	  	$("#click_to_see_image").fadeOut(1000);
+		$("#cancel_image").fadeIn(1000);
+	  	$("#changed_edit_image").slideDown(1000);
+	}
+	
+	function show_volunteer_image(user_id){
+		$("#click_to_see_image_"+user_id).fadeOut(1000);
+		$("#cancel_image_"+user_id).fadeIn(1000);
+	  	$("#changed_edit_image_"+user_id).slideDown(1000);
+	}
+	
+	
+	function hide_image(){
+		$("#cancel_image").fadeOut(1000);
+	  	$("#click_to_see_image").fadeIn(2000);
+	  	$("#changed_edit_image").slideUp(1000);
+	}
+	
+	function hide_volunteer_image(user_id){
+		$("#cancel_image_"+user_id).fadeOut(1000);
+	  	$("#click_to_see_image_"+user_id).fadeIn(2000);
+	  	$("#changed_edit_image_"+user_id).slideUp(1000);
+	}
+
+	function changed_submit_edit_form(){
+	  	$("#changed_edit_form").ajaxSubmit({
+		  	url: 'update_profile',
+		  	type: 'POST',
+			beforeSubmit: function(){
+				$("#changed_edit_form_div").fadeOut(2000);
+			},
+			success: function(responseText){
+				$("#changed_edit_form_div").html(responseText).slideDown(1000);
+			}
+		})
+		return false;
+	}
+
+	function verify_password(){
+		var password_list = [];
+		password_list[0] = $("#current_password").attr("value");
+		password_list[1] = $("#new_password").attr("value");
+		password_list[2] = $("#new_password_confirmation").attr("value");
+		
+		$("#change_password_error_div").fadeOut(1000);
+		
+		$.post('change_password', {
+			'password_list[]': password_list
+		}, function(script){}, "script");
+	}
+
+	function show_user_details(user_id,event){
+	  var user_div = "user_detail_id_"+user_id;
+	  $("div[id^='user_detail_id_']").each(function(){
+	  	if(this.id == user_div){
+		  document.getElementById(user_div).style.top = event.pageY-200+"px";
+		  document.getElementById(user_div).style.left = event.pageX-100+"px";
+		  $(this).slideDown(1000);
+		}
+		else{
+		  $(this).fadeOut(1000);
+		}
+	  })
+	}
+
+	function sample(){
+		alert("Test ...");
+	}
+	
+	function schedule_mouse_over(schedule_id){
+		var schedule_element = document.getElementById(schedule_id);
+		if(document.getElementById("schedule_active_tab").value != schedule_id){
+			schedule_element.setAttribute("class","schedule_inside_hover_tab")
+		}
+	}	
+	
+	function schedule_mouse_out(schedule_id){
+		var schedule_element = document.getElementById(schedule_id);
+		if(document.getElementById("schedule_active_tab").value != schedule_id){
+			schedule_element.setAttribute("class","schedule_inside_inactive_tab")
+		}
+	}	
+	
+	function schedule_a_programe(div_id,action_name){
+
+	  if(div_id == "schedule_inside_second_td_div"){
+		$("div[id^='datepicker_']").each(function(){
+			$('#'+this.id).remove();
+		})
+	  }
+
+	  if (div_id != (document.getElementById("schedule_active_tab").value+"_div")) {
+
+	   	$("#all_schedules_update_div").fadeOut(1000);
+	   	$("#all_schedules_update_div").html("");
+		change_class(div_id);
+		
+		$.ajax({
+			type: "GET",
+			url: '/schedule/'+action_name,
+			data: "just_partial=true",
+			success: function(data){
+		   	  $("#all_schedules_update_div").html(data);
+		   	  $("#all_schedules_update_div").fadeIn(1000);
+
+			  /* This below block is to ensure that the DatePicker doesn't appear once we go from the Schedule a Programme to the 
+			  * All Schedules Tab on the bottom left corner of the page.
+			  */
+			  if (document.getElementById('schedule_date')) {
+					$('#schedule_date').DatePickerShow();
+					$('#schedule_date').DatePickerHide();
+//				$("div[id^='datepicker_']").each(function(){
+//				})
+			  }  
+	   		 },
+			 beforeSend: function(){
+			 	$('#ajax_loading_block').fadeIn(1000);
+			 },
+			 complete: function(){
+			 	$('#ajax_loading_block').fadeOut(1000);
+			 }
+		})
+		
+	  }
+	  
+	}
+	
+	function change_class(div_id){
+	  $("td[class^='schedule_inside_']").each(function(){
+	  	if(this.id+"_div" == div_id){
+			this.setAttribute("class","schedule_inside_active_tab");
+			document.getElementById("schedule_active_tab").setAttribute("value",this.id);
+		}
+		else{
+			this.setAttribute("class","schedule_inside_inactive_tab")
+		}
+	  })
+	}
+
+	function submit_schedule(){
+		
+	  	$("#schedule_remote_form").ajaxSubmit({
+		  	url: '/schedule/create_schedule_for_a_programme.js',
+			dataType: 'script',
+		  	type: 'POST',
+			beforeSubmit: function(){
+				$("#schedule_error_message").fadeOut(1000);
+				$("#schedule_programme").fadeTo(250,.33,function(){});
+				$("#ajax_loader_id").fadeIn(1000);
+			},
+			success: function(responseText){
+//				$("#ajax_loader_id").fadeOut(1000);
+//				$("#schedule_programme").fadeOut(1000);
+//				$("#schedule_programme").fadeTo(50,1,function(){});
+//				$("#schedule_programme").html(responseText).slideDown(1000);
+			}
+		})
+		return false;
+	}
+	
+	Array.prototype.unique = function () {
+		var r = new Array();
+		o:for(var i = 0, n = this.length; i < n; i++)
+		{
+			for(var x = 0, y = r.length; x < y; x++)
+			{
+				if(r[x]==this[i])
+				{
+					continue o;
+				}
+			}
+			r[r.length] = this[i];
+		}
+		return r;
+	}	
+	
+	function initTabs() {
+	    var tabIndex = {'home':5,'aboutus':4,'gallery':3,'stats':2,'newsletters':1,'contact':0}
+	    var re = /#\w+$/; // This will match the anchor tag in the URL i.e. http://here.com/page#anchor
+	    var match = re.exec(document.location.toString());
+	    if (match != null) var anchor = match[0].substr(1);
+	    for (key in tabIndex) {
+	        if (anchor == key) {
+	            selectedTab = tabIndex[key];
+	            break;
+	        }
+			else selectedTab = 5;
+	    }
+		
+		tabs = $("#home_tabs").right_tabs({ 	
+			selected: selectedTab,
+		 	fx: {opacity: 'toggle'}
+		}).find(".ui-tabs-nav-right").sortable({axis:'x'});
+//	    tabs = $("#home_tabs").tabs({selected:selectedTab}); // default behaviour
+	    tabs.bind('tabsshow', function(event, ui) { // when tab is shown update the URL
+	        var re = /#\w+$/;
+	        var url = document.location.toString();
+	        // to make bookmarkable
+		document.location = url.replace(re, "#"+ui.panel.id);
+	    });
+	}
+
+	  $(function() {
+		$("#tabs").tabs({ fx: { opacity: 'toggle' } }).find(".ui-tabs-nav").sortable({axis:'x'});
+
+		// This is introduced so as to make the tabs book-markable.
+		initTabs();
+											
+//		$('a.process_flow').zoomimage();
+
+		$("#signup_tabs").tabs({ fx: { opacity: 'toggle' } }).find(".ui-tabs-nav").sortable({axis:'x'});
+
+		/*
+		 * This below function is for the News and Events Marquee functionality 
+		 */
+		$('div.news_and_events_marquee marquee').mouseover(function () {
+            $(this).trigger('stop');
+        }).mouseout(function () {
+            $(this).trigger('start');
+        }).mousemove(function (event) {
+            if ($(this).data('drag') == true) {
+                this.scrollLeft = $(this).data('scrollX') + ($(this).data('x') - event.clientX);
+            }
+        }).mousedown(function (event) {
+            $(this).data('drag', true).data('x', event.clientX).data('scrollX', this.scrollLeft);
+        }).mouseup(function () {
+            $(this).data('drag', false);
+        });
+		//Till Here ...
+
+	  });
+
+		$(document).ready(function() {
+
+	      $("#first_page").fadeIn(1000);
+
+	  	  $('#sample_action_id').ajaxForm({
+		  	url: 'sample_action.js',
+		  	type: 'POST',
+			datatype: 'script'
+		  });
+		  
+		});
+
+	function populate_place(formated,schedule_type){
+		var schedule_locations_hash = new Array();
+		var start_date;
+		var end_date; 
+		if(schedule_type == "single"){
+			start_date = end_date = parseInt(formated.split(",")[0],10);
+		}else{
+			start_date = parseInt(formated[0].split(" ")[0],10);
+			end_date = parseInt(formated[1].split(" ")[0],10);
+		}
+
+		var schedule_start_date_array = new Array();
+		var schedule_place_name = "";
+		schedule_locations_hash = $("#schedule_locations_hash").attr('value').split(",");
+		
+		for(var i=0;i<schedule_locations_hash.length;i++){
+			
+			schedule_locations_hash[i] = schedule_locations_hash[i].replace(/^{|"|}$/,"");
+			parsed_schedule_location_id = parseInt(schedule_locations_hash[i],10);
+			if(parsed_schedule_location_id >= start_date && parsed_schedule_location_id <= end_date){
+				schedule_place_name = schedule_locations_hash[i].split("=>")[1];
+				schedule_start_date_array[i] = schedule_place_name.replace('"',"");
+			}
+
+		}
+		var unique = schedule_start_date_array.unique();
+		$("#schedule_locations_list").attr('value',unique.join(',').replace(/^,|"/,""));
+		$("#schedule_locations").html(unique.join('</br>').replace(/^,|"/,""));
+		$("#schedule_locations").slideDown(1000);
+
+	}
+	
+	function invite_other_docs(schedule_id,programme_name){
+		$("#non_volunteered_docs_for_"+schedule_id).html("");
+		$("#invite_docs_popup_"+schedule_id).slideDown(400);
+		$.ajax({
+			url: 'invite_docs.js',
+			data: {
+				'schedule_id': schedule_id,
+				'programme_name': programme_name
+			},
+			dataType: 'script',
+			success: function(return_data){
+			}
+		});
+		$("#invite_docs_popup_"+schedule_id).slideUp(400);
+	}
+
+  	function invite_this_doctor_for_a_schedule(user_id,schedule_id,programme_name){
+	  $.ajax({
+	  	url: 'invite_this_doc.js',
+		data: {'user_id':user_id,'schedule_id':schedule_id,'programme_name':programme_name},
+		dataType: 'script',
+		type: 'post',
+		success: function(return_data){
+		}
+	  });
+	}
+	
+	
+  	function approve_reject_this_doc_for_schedule(user_id,schedule_id,programme_name,approve_reject){
+	  $.ajax({
+	  	url: 'approve_reject_this_doc.js',
+		data: {'user_id':user_id,'schedule_id':schedule_id,'programme_name':programme_name,'approve_reject':approve_reject},
+		dataType: 'script',
+		type: 'post',
+		success: function(return_data){
+		}
+	  });
+	}
+
+	function sleep(ms)
+	{
+		var dt = new Date();
+		dt.setTime(dt.getTime() + ms);
+		while (new Date().getTime() < dt.getTime());
+	}
+
+	function accept_reject_invitation_for_this_schedule(schedule_id,programme_name,background_class,volunteer_type){
+		$("#accept_decline_inv_div_"+schedule_id).slideDown(1000);
+	}
+
+	function accept_reject_invitation(schedule_id,programme_name,background_class,volunteer_type,accept_reject,user_id){
+		$("#all_schedules_message").slideUp(1000);
+		
+		/*
+		 * This modification has been done so as to accomodate the Admin's ability to accept/reject the invitation on behalf of the doctor 
+		 * directly. 
+		 */
+		var from_where = '';
+		if(volunteer_type == 'admin'){
+			from_where = volunteer_type;
+			volunteer_type = '';
+		}
+		// Till Here
+		
+  		$.post('volunteer_for_schedule.js', {'schedule_id':schedule_id,'programme_name':programme_name,'background_class':background_class,'volunteer_type':'accept_reject','accept_reject':accept_reject,'from_where':from_where,'user_id':user_id},
+		  function(script){
+		  },"script"
+		);
+	}
+
+	function volunteer_for_this_schedule(schedule_id,programme_name,background_class,volunteer_type){
+		$("#all_schedules_message").slideUp(1000);
+
+  		$.post('volunteer_for_schedule.js', {'schedule_id':schedule_id,'programme_name':programme_name,'background_class':background_class,'volunteer_type':volunteer_type},
+		  function(script){
+		  },"script"
+		);
+	}
+	
+	function view_volunteers_for_this_schedule(schedule_id,programme_name,end_date){
+		up_all_other_update_volunteers_details(schedule_id);
+//		$("#ajax_loader_"+schedule_id).fadeIn(400);
+		
+		$.ajax({
+			url: 'view_volunteers_for_this_schedule.html',
+			data: "schedule_id="+schedule_id+"&programme_name="+programme_name+"&end_date="+end_date,
+			dataType: 'html',
+			success: function(return_data){
+				$("#update_volunteers_details_"+schedule_id).html(return_data);
+				$("#schedule_ajax_loader_for_"+schedule_id).fadeOut(400);
+				$("#update_volunteers_details_"+schedule_id).slideDown(1000);
+			},
+			beforeSend: function(){
+			  $('#schedule_div_'+schedule_id).fadeTo("fast",0.2);
+			  $('#schedule_ajax_loader_for_'+schedule_id).fadeIn(1000);
+			},
+			complete: function(){
+			  $('#schedule_ajax_loader_for_'+schedule_id).fadeOut(1000);
+			  $('#schedule_div_'+schedule_id).fadeTo("slow",1);
+			}
+		});
+	}
+	
+	function up_all_other_update_volunteers_details(schedule_id){
+		var update_volunteers_details_div = "update_volunteers_details_"+schedule_id;
+		$("div[id^='update_volunteers_details_']").each(function(){
+			if(this.id != update_volunteers_details_div){
+				$(this).slideUp(1000);
+				$(this).html("");
+			}
+		});
+	}
+
+	function get_and_displace_page(action_name,to_be_updated_div,masked_div_name){
+		$("#"+masked_div_name).fadeOut(400);
+	   	$.get(action_name, function(data){
+		   	  $("#"+to_be_updated_div).html(data);
+		   	  $("#"+to_be_updated_div).fadeIn(1000);
+	   	})
+	}
+	
+	function change_tab_and_scroll(tab_name,tab_index,div_id_to_scroll){
+		$('#'+tab_name).right_tabs('select', tab_index);
+		$('#'+div_id_to_scroll).scrollTo(1000);
+	}
+
+	jQuery.fn.extend({
+	  scrollTo : function(speed, easing) {
+	    return this.each(function() {
+	      var targetOffset = $(this).offset().top;
+	      $('html,body').animate({scrollTop: targetOffset}, speed, easing);
+	    });
+	  }
+	});
+
+  	$('#newsletter_form').ajaxForm({
+	  	url: 'create_newsletter.js',
+//		beforeSubmit: sample_alert(),
+	  	type: 'POST',
+		datatype: 'script',
+		success: function(return_data){
+			alert(return_data);
+		}
+  	});
+	
+
+	function sample_alert(){
+		alert("Hi I am here ....  :) ");
+	}	
+
+	// This function is to Select / De-Select all the Specializations at a time
+	function clear_select_all_specs(id,page_for){
+	  var all_users = document.getElementById(page_for+'_all_users').value.split(",");
+	 
+		if($('#'+id).is(':checked')){
+		  	$('input[type=checkbox].'+page_for+'_specializations_filter_checkbox_class').each(function(){
+			  $(this).attr('checked',true);
+			});
+
+			for(i=0;i<all_users.length;i++){
+			  var div_to_show = page_for+'_'+all_users[i]+'_div';
+			  var invited_div_to_show = 'invited_user_'+all_users[i]+'_div';
+			  if($('#'+div_to_show).length > 0){
+			  	$('#'+div_to_show).show("fast");
+			  }else{
+			  	$('#'+invited_div_to_show).show("fast");
+			  }
+			}
+		}else{
+		  	$('input[type=checkbox].'+page_for+'_specializations_filter_checkbox_class').each(function(){
+			  $(this).attr('checked',false);
+			});
+
+			for(i=0;i<all_users.length;i++){
+			  var div_to_hide = page_for+'_'+all_users[i]+'_div';
+			  var invited_div_to_hide = 'invited_user_'+all_users[i]+'_div';
+			  if($('#'+div_to_hide).length > 0){
+			  	$('#'+div_to_hide).hide("fast");
+			  }else{
+			  	$('#'+invited_div_to_hide).hide("fast");
+			  }
+			}
+		}	  
+	}
+								

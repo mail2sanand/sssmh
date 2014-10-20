@@ -1,0 +1,11 @@
+$("#schedule_programme").fadeTo(10,1,function(){});
+$("#ajax_loader_id").fadeOut(500);
+$("#schedule_error_message").html("<%=@error_messages%>").slideDown(1000);
+<%if @error_messages =~ /success/%>
+  $('#widgetField span').get(0).innerHTML = "";
+  $("#schedule_locations").fadeOut(1000);
+<%end%>
+
+<%unless @error_messages%>
+	$("#schedule_remote_form")[0].reset();
+<%end%>

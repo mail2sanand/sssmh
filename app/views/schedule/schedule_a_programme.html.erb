@@ -1,0 +1,222 @@
+ 	<%=javascript_include_tag 'datepicker'%>
+
+   	<%= stylesheet_link_tag 'datepicker'%>
+   	<%= stylesheet_link_tag 'layout'%>
+
+ 	<%=javascript_include_tag 'eye'%>
+ 	<%=javascript_include_tag 'utils'%>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#schedule_specialization').multiselect2side({selectedPosition: 'right', moveOptions: false});
+		});
+			
+		$(function() {
+//			$("#input_div").datepicker();
+
+//			$('#schedule_date').DatePicker({
+			$('.schedule_date').DatePicker({
+					format:'d B, Y',
+					date: $('#schedule_date').val(),
+					current: $('#schedule_date').val(),
+					starts: 1,
+					position: 'r',
+					onBeforeShow: function(){
+						$('#schedule_date').DatePickerSetDate($('#schedule_date').val(), true);
+					},
+					onChange: function(formated, dates){
+						populate_place(formated,"single");
+						$('#schedule_date').val(formated);
+						$('#schedule_date').DatePickerHide();
+						$("#schedule_start_date").attr('value',''+formated+'')
+						$("#schedule_end_date").attr('value',''+formated+'')
+					}
+			});
+			
+		});
+		
+		function enable_date_range_calendar(){
+			$("#schedule_locations").html("");
+			$("#schedule_locations").slideUp(1000);
+				
+			if ($('#schedule_date_range').is(':checked') == true) {
+				$("#schedule_date").slideUp(1000);
+				$("#schedule_range_div").attr('style',"display:block;")
+				$("#schedule_range_div").slideDown(1000);
+
+				var now3 = new Date();
+				now3.addDays(-4);
+				var now4 = new Date();
+				
+				$('#widgetCalendar').DatePicker({
+					flat: true,
+					format: 'd B, Y',
+					date: [new Date(now3), new Date(now4)],
+					calendars: 1,
+					mode: 'range',
+					starts: 1,
+					onChange: function(formated) {
+						if (formated[0] != formated[1]) {
+							populate_place(formated);
+							$('#widgetCalendar').slideUp(1000);
+						}
+						else {
+							$("#schedule_locations").fadeOut(1000);
+						}
+						$("#schedule_start_date").attr('value',''+formated[0]+'')
+						$("#schedule_end_date").attr('value',''+formated[1]+'')
+						$('#widgetField span').get(0).innerHTML = formated.join(' ==> ');
+					}
+				});
+	
+				var state = false;
+				$('#widgetField>a').bind('click', function(){
+					$('#widgetCalendar').stop().animate({height: state ? 0 : $('#widgetCalendar div.datepicker').get(0).offsetHeight}, 200);
+					state = !state;
+					return false;
+				});
+				$('#widgetCalendar div.datepicker').css('position', 'absolute');
+				
+			}else{
+				$("#schedule_date").slideDown(1000);
+				$("#schedule_range_div").attr('style',"display:none;")
+				$("#schedule_range_div").slideUp(1000);
+			}
+		}
+		
+	</script>
+
+<% remote_form_for :schedule,:url=>{"action" => 'schedule_a_programme'},:html=>{:method => :post, :id => "schedule_remote_form"} do |schedule|%>
+
+  <div id="ajax_loader_id" class="ajax_loader" style="display:none;z-index:20;left:500px;top:100px;position:absolute;">
+    <img src="/images/ajax-loader-3.gif" border=0><br>
+    Creating the Schedule ...
+  </div>
+  
+  <div id="schedule_programme">
+	  <table width=100% cellpadding=0 cellspacing=0 class="schedule_main_update_table" border=0><tr><td colspan=5>
+	   <table width=60% cellpadding=0 cellspacing=0 border=0 class="schedule_inside_table">
+	  	<tr>
+	  		<td colspan=5>
+	  			<img src="/images/schedule_table_top_grey.gif" border=0>
+	  		</td>
+		</tr>
+	  	<tr class="schedule_tr_1">
+	  		<td colspan=2 align="center" class="heading_class">
+	  			Schedule A Programme <br><br>
+	  		</td>
+		</tr>
+		
+	  	<tr class="schedule_tr_1">
+	  		<td colspan="2" style="padding-left:200px;">
+			  <div id="schedule_error_message" style="width:300px;padding-left:35px;padding-top:5px;padding-bottom:5px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;font-size:12px;background-color:#EBEBEB;display:none;text-align:left;">
+			  	<%= @error_messages %>
+			  </div><br>
+	  		</td>
+		</tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			Programme Name: &nbsp;
+	  		</td>
+	  		<td>
+	  			<%= schedule.text_field :programme_name%>
+	  		</td>
+	  	</tr>
+		<tr class="schedule_tr_1"><td colspan=2>
+			<div style="padding-left:30px;">  -------------------------------------------------------------------------------------------------------------------------------------- </div>
+		</td></tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			Single / Date Range &nbsp;<br>
+				(Unselect the Box) / (Select the Box)
+	  		</td>
+	  		<td>
+				<input type="checkbox" id="schedule_date_range" onclick="enable_date_range_calendar();"/><br>
+	  		</td>
+	  	</tr>
+		<tr class="schedule_tr_1"><td colspan=2>
+			<div style="padding-left:30px;">  -------------------------------------------------------------------------------------------------------------------------------------- </div>
+		</td></tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			Programme Start and End Dates:
+	  		</td>
+	  		<td  align="center">
+	  			
+	  			<div class="schedule_date_div" id="schedule_date_div" style="display:inline;">
+					<input class="schedule_date" id="schedule_date" value="<%=Date.today.strftime('%d %b, %Y')%>"/>
+				</div>
+				
+<!--
+				<input class="schedule_date" id="schedule_date" value="<%=Date.today.strftime('%d %b, %Y')%>" style="display:inline;"/>
+				<div id=""><input type="text" id="input_div"></div>
+				$("#input_div").datepicker();
+-->
+	  			<!-- Widget Calendar -->
+				  <div id="schedule_range_div" style="display:none;">
+					<div id="widget">
+						<div id="widgetField">
+							<span></span>
+	
+							<a href="#">Select date range</a>
+						</div>
+						<div id="widgetCalendar">
+						</div>
+					</div>
+				  </div>
+	  			<!-- Widget Calendar Ends Here ... -->
+
+				<input type="hidden" name="schedule[start_date]" id="schedule_start_date">
+				<input type="hidden" name="schedule[end_date]" id="schedule_end_date">
+				<input type="hidden" name="schedule[location_id]" id="schedule_locations_list">
+	  		</td>
+	  	</tr>
+		<tr class="schedule_tr_1"><td colspan=2>
+			<div style="padding-left:30px;">  -------------------------------------------------------------------------------------------------------------------------------------- </div>
+		</td></tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			Place Of Programme:
+	  		</td>
+	  		<td>
+  				<input type="hidden" id="schedule_locations_hash" value='<%=@location_hash%>'/>
+	  			<div id="schedule_locations" style="display:none;" class="schedule_location_names">
+	  			</div>
+	  		</td>
+	  	</tr>
+		<tr class="schedule_tr_1"><td colspan=2>
+			<div style="padding-left:30px;">  -------------------------------------------------------------------------------------------------------------------------------------- </div>
+		</td></tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			If Others Please Specify:
+	  		</td>
+	  		<td>
+	  			<%= schedule.text_field :other_locations%>
+	  		</td>
+	  	</tr>
+		<tr class="schedule_tr_1"><td colspan=2>
+			<div style="padding-left:30px;">  -------------------------------------------------------------------------------------------------------------------------------------- </div>
+		</td></tr>
+	  	<tr class="schedule_tr_1">
+	  		<td>
+	  			Specialization:
+	  		</td>
+	  		<td width="500px" align="left">
+	  			<% specializations_mandatory = @specializations.select{|e| e.specialization_type == "M"}%>
+	  			<%= select_tag "schedule[specializations]",options_for_select(@specializations.map{|u| [u.name,u.id]},:selected=>specializations_mandatory.map{|u| u.id}),:size=>5,:multiple=>true,:id=>"schedule_specialization"%>
+	  		</td>
+	  	</tr>
+	    <tr class="schedule_tr_1"><td colspan="2" align="center">
+			<input type="button" id="submit_button" value="Create Schedule" onclick="submit_schedule();">
+		</td></tr>
+	  	<tr>
+	  		<td colspan=5>
+	  			<img src="/images/schedule_table_bottom_grey.gif" border=0>
+	  		</td>
+		</tr>
+	   </table>
+	  </td></tr></table>
+    </div>
+<% end%>
+

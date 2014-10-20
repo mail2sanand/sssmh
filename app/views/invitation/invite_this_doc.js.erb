@@ -1,0 +1,16 @@
+<%if @success != false%>
+	$("#display_un_volunteered_docs_<%=@user_id%>_tr").fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").slideUp(750);
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").html("");
+	
+	$("#update_volunteers_details_<%=@schedule_id%>").slideUp(1000);
+	$("#update_volunteers_details_<%=@schedule_id%>").html("");
+	$("#update_volunteers_details_<%=@schedule_id%>").html("<%= escape_javascript(render :partial => "/schedule/volunteer_invite_partial", :locals => {:users_volunteered_for_this_schedule => @users_volunteered_for_this_schedule, :users_invited_for_this_schedule => @users_invited_for_this_schedule, :programme_name => @programme_name, :schedule_id => @schedule_id, :volunteer_message => "Doctors Volunteered for '#{@programme_name}' programme", :page_for => 'display_volunteered_docs',:end_date => @end_date,:user_specializations => @volunteered_user_specializations})%>");
+	$("#update_volunteers_details_<%=@schedule_id%>").slideDown(1000);
+
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").html("<%= escape_javascript(render :partial => '/schedule/volunteer_invite_partial', :locals => {:users_volunteered_for_this_schedule => @non_volunteered_docs, :programme_name => @programme_name, :schedule_id => @schedule_id, :volunteer_message => "Non-Volunteered Doctors for '#{@programme_name}' programme", :page_for => 'display_un_volunteered_docs',:user_specializations => @non_volunteered_user_specializations})%>");
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").slideDown(1000);
+<%else%>
+  $("#display_un_volunteered_docs_div").html("There seems to be some technical Problem. We will ge back soon.");
+  $("#display_un_volunteered_docs_div").slideDown(1000);
+<%end%>

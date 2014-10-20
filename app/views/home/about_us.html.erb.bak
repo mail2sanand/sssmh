@@ -1,0 +1,194 @@
+<table cellpadding=0 cellspacing=0 border=0>
+  <tr>
+	<td width="762" valign="top">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+				<div class="side_headings_big" style="">
+					ABOUT US
+			 	</div>
+			</td>
+          </tr>
+          <tr>
+            <td valign="top">
+			  <br>
+		      <p class="txtheader"><strong><a name="specialities" id="specialities"></a>Specialities Offered</strong></p>
+		      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		        <tr>
+		          <td colspan=2 valign="top">
+	          		<ol class="big_bodytext">
+					   <li>  Radiology, Medicine, Surgery, Orthopedics, Obstetrics & Gynaecology, E.N.T, Dentistry, Ophthalmology, Paediatrics, Dermatology, Psychiatry are available every month.</li>
+					   <li>  Based on the need, specialties like Urology, Cardiology. Cardio-Thoracic Surgery, Neurology are also provided for a duration of 4 days during the 12-day programme.</li>
+					</ol>
+				  </td>
+
+		        </tr>
+		      </table>
+
+				  <!--This is the content for the Nodal Satilite Villages-->
+					  <div id="div_of_new_nodal_satilites_div" style="display:none;position:absolute;z-index:101;">
+					  	<table cellpadding=0 cellspacing=0 border=0>
+							<tr style="background-image:url('/images/home_folder/home_top.gif');height:25px;">
+							  <td colspan=4 align="right">
+							  	<img src="/images/home_folder/about_us_folder/close_button_1.gif" border=0 style="padding-right:10px;" onmouseover="this.style.cursor='pointer';" onclick="$('#div_of_new_nodal_satilites_div').slideUp(400);" title="Close">
+							  </td>
+							</tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')"><td height="35px;" align="center" colspan=4 style="font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;font-size:14;font-weight:bold;">
+								Service Schedule
+							</td></tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableHeader" width="140px">Date</td>
+								<td class="TableHeader" width="80px">Nodal Village</td>
+								<td class="TableHeader" width="140px;">Mandal</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">1<sup>st</sup> of every month</td>
+								<td class="TableContent">Nidimamidi</td>
+								<td class="TableContent">Puttaparthi</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">2<sup>nd</sup> of every month</td>
+								<td class="TableContent">Byrapuram</td>
+								<td class="TableContent">Kotthacheruvu</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">3<sup>rd</sup> of every month</td>
+								<td class="TableContent">Markuntapalli</td>
+								<td class="TableContent">Kotthacheruvu</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">4<sup>th</sup> of every month</td>
+								<td class="TableContent">Cherlopalli</td>
+								<td class="TableContent">Puttaparthi</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">5<sup>th</sup> of every month</td>
+								<td class="TableContent">Chowtukuntapalli</td>
+								<td class="TableContent">Nallamada</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">6<sup>th</sup> of every month</td>
+								<td class="TableContent">Kondakamarla</td>
+								<td class="TableContent">Obuladevarapalli</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">7<sup>th</sup> of every month</td>
+								<td class="TableContent">Gownipalli</td>
+								<td class="TableContent">Obuladevarapalli</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">8<sup>th</sup> of every month</td>
+								<td class="TableContent">Vankarakunta</td>
+								<td class="TableContent">Nallamada</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">9<sup>th</sup> of every month</td>
+								<td class="TableContent">Marala</td>
+								<td class="TableContent">Bukkapatnam</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">10<sup>th</sup> of every month</td>
+								<td class="TableContent">Chandrayunipalli</td>
+								<td class="TableContent">Bukkapatnam</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle_light.gif')">
+								<td class="TableContent">11<sup>th</sup> of every month</td>
+								<td class="TableContent">Veldurthi</td>
+								<td class="TableContent">Chennekothapalli (C.K.Palli)</td>
+							</tr>	
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_middle.gif')">
+								<td class="TableContent">12<sup>th</sup> of every month</td>
+								<td class="TableContent">Obulampalli</td>
+								<td class="TableContent">Chennekothapalli (C.K.Palli)</td>
+							</tr>
+							<tr><td colspan=4><img src="/images/home_folder/row_border.gif"></td></tr>
+							<tr style="background-image:url('/images/home_folder/home_bottom.gif');width:777px;height:19px;">
+							  <td colspan=4 align="right">
+							  	<img src="/images/home_folder/about_us_folder/close_button_1.gif" border=0 style="padding-right:10px;" onmouseover="this.style.cursor='pointer';" onclick="$('#div_of_new_nodal_satilites_div').slideUp(600);" title="Close">
+							  </td>
+							</tr>
+					  	</table> 
+					  </div>
+				  <!-- Till here -->
+
+		      <div style="height:30px;" id="nodal_villages_div"><p class="txtheader"><strong><a name="nodal_satilites" id="nodal_satilites"></a>Service Schedule</strong></p></div>
+			  <div onclick="$('#div_of_new_nodal_satilites_div').slideDown('400');" style="text-decoration:underline;" onmouseover="this.style.cursor='pointer'">
+			  	Click to display the service schedule for the programme 
+			  </div>
+			  
+			  <div style="padding-top:20px;" id="service_area_map_main1_div">
+			  	<p class="txtheader"><strong>
+			  		<a name="service_area_map_main_div" id="service_area_map_main_div"></a>Service Area Map</strong>
+				</p>(Click on the map and workflow diagram below to view enlarged image)<br /><br />
+			  </div>
+				
+				  <!--	
+				  		This is the content for the Nodal Satilite Villages 
+				  		This zoom module is not being used by the feedback from the trust.      
+				  -->
+					  <div id="div_of_service_area_map_div" style="">
+						<script type="text/javascript">
+					        $(function() {
+					        	$("#service_area_map_div").anythingZoomer({
+					        	  expansionSize: 60,
+					        	  speedMultiplier: 2.6,
+					        	});
+					        });
+						</script>
+						<!-- Till Here  -->
+
+						<div>
+						  <img title="Click for big Image" style="cursor:pointer;" src="/images/home_folder/about_us_folder/Service_area_map_small.png" onclick="window.open('<%=root_url%>images/home_folder/about_us_folder/Service_area_map.gif'),'SSSMH - Service Area Map','scrollbar=yes'">
+						</div>						
+
+<!--
+						<div id="service_area_map_div">
+							<div id="small">
+ 							  <img src="/images/home_folder/about_us_folder/Service_area_map_small.png" onclick="$('#mover').toggle(500);">
+							</div>
+			  
+					        <div id="mover" style="padding-top:350px;">
+				                <div id="overlay"></div>
+				                <div id="large">
+									<img src="/images/home_folder/about_us_folder/Service_area_map.gif" style=""/>							
+								</div>
+							</div>
+						</div>
+					  </div>
+-->
+				  <!-- Till here -->
+			  
+			  </div>
+
+			  <div style="padding-top:15px;">
+		        <p class="txtheader"><strong><a name="work_flow" id="work_flow"></a>Workflow at the Programme Site</strong></p>
+			  </div>
+				
+              <p class="txtheader">
+				<img  title="Click for big Image" style="cursor:pointer;" src="/images/home_folder/about_us_folder/process_flow.jpg" border="0" onclick="window.open('<%= root_url%>images/home_folder/about_us_folder/process_flow_big.jpg'),'SSSMH - Process Work Flow','scrollbar=yes'"/>
+			  </p>
+
+			  <a href="http://www.sssmt.org.in/pages/index.asp" target="_blank" style="text-decoration:none;font-weight:bold;color:#69696A;font-size:13;"><span style="font-weight:bold;text-decoration:blink;font-size:large;">&gt;&gt;</span>Sri Sathya Sai Central Trust</a> 
+			  
+              <p>If you are a doctor and would like to volunteer for the programme, please <a href="/account/signup" target="_blank" style="font-size: 10pt;"><strong>click here</strong></a> to register</p>
+              <p>&nbsp;</p></td>
+          </tr>
+        </table></td>
+      </tr>
+     </table>
+    </td>
+  </tr>
+</table>

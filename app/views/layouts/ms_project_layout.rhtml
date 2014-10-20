@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>
+		<%= @title ? @title : "Sri Sathya Sai Mobile Hospital"%>
+	</title>
+
+ 	<%=javascript_include_tag 'jquery'%>
+ 	<%=javascript_include_tag 'jquery.form'%>
+ 	<%=javascript_include_tag 'jquery-ui'%>
+
+ 	<%=javascript_include_tag 'zoomer.jquery'%>
+	
+	<%= stylesheet_link_tag "demos"%>
+	
+ 	<%= stylesheet_link_tag "jquery-ui"%>
+ 	<%=javascript_include_tag 'jquery.multiselect2side'%>
+   	<%=stylesheet_link_tag "jquery.multiselect2side"%>
+
+ 	<%=javascript_include_tag 'account_info'%>
+ 	<%= stylesheet_link_tag "ms_project_css"%>
+
+ 	<%=javascript_include_tag 'anima_drag'%>
+ 	<%=javascript_include_tag 'jquery.anchor'%>
+ 	<%=javascript_include_tag 'eye'%>
+ 	<%=javascript_include_tag 'utils'%>
+ 	<%=javascript_include_tag 'zoomimage'%>
+ 	<%=javascript_include_tag 'jquery.tools.min'%>
+ 	<%=javascript_include_tag 'jquery.easing'%>
+	<%=javascript_include_tag 'jquery.rating'%>
+	<%= stylesheet_link_tag "jquery.rating"%>
+	
+ 	<%= stylesheet_link_tag "scrollable"%>
+	
+ 	<%= stylesheet_link_tag "home"%>
+
+	<%= @content_for_head %>
+
+	<script type="text/javascript">
+
+	</script>
+
+</head>
+
+<body>
+
+  <table border="0" class="alerts" align="center" width="900px"><tr valign="top"><td>
+  	<div style="width:991px;height:107px" class="image_class">
+		<img src="/images/sssmh_logo1.jpg" border=0>
+  	</div>
+	<div id="message" style="display:none"></div>
+
+	<div id="first_page" style="display:none" align="center">
+	    <div class="maroon_gradient" style="z-index:10;">
+		  <%if session[:user]%>
+			<div style="float:left;vertical-align:middle;padding-left:5px;">
+			  <a href="/" target="_blank" class="white_class">SSSMH Portal Home</a>
+			</div>
+	      <%end%>
+		  
+	      <div id="user_logged" align="right" style="padding-right:5px;">
+	    	<%if session[:user]%>
+	    	   <span class="white_class">Welcome <%= session[:user][:full_name] =~ /Dr. / ? "" : (session[:user][:gender] == 1 ? "Mrs" : "Mr")%> <%=(session[:user][:full_name]).split(' ').map(&:capitalize).join(' ')%></span></br>
+			   <%= link_to "Home",{:controller=>'account',:action=>'index'},:class => "white_class"%>&nbsp;&nbsp;&nbsp;
+	    	   <%= link_to "My Profile", {:controller=>'account',:action=>'edit'},:class => "white_class"%> &nbsp;&nbsp;&nbsp;
+	    	   <%= link_to "Log Out", {:controller=>'account',:action=>'logout'},:class => "white_class"%> 
+	    	<%end%>
+	      </div>
+		</div>
+		<%=@content_for_layout%>
+	</div>
+  </td></tr>
+  <tr>
+    <td height="24" bgcolor="#0038A9"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="75%"><!--&nbsp;&nbsp;<span class="txtwhite"><a href="feedback.htm" class="archives">Feedback</a> </span>--></td>
+        <td width="25%" class="txtwhite">Copyright &copy; 2013 Sri Sathya Sai Central Trust</td>
+      </tr>
+    </table></td>
+  </tr>
+  </table>
+</body>
+</html>

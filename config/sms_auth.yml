@@ -1,0 +1,8 @@
+way2sms_credentials:
+  username: 9500079694
+  password: sairam
+  
+sms2mint_credentials:
+  username: 9440304525
+  password: sairam
+  country_code: 91

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+	function check_form_serilize(){
+		alert($('form').serialize());
+		return false;
+	}
+	
+	function trigger_sms_receiving(){
+		$.ajax({
+			type: "GET",
+			dataType: "script",
+			url: 'recieve_sms_from_sms2mint_web',
+			data: "",
+			success: function(data){
+	   		},
+			beforeSend: function(){
+			  //$('#ajax_loading_block').fadeIn(1000);
+			},
+			complete: function(){
+			  //$('#ajax_loading_block').fadeOut(1000);
+			}
+		})
+	}
+</script>
+
+<input type="button" value="Check SMS2Mint Inbox" onclick="trigger_sms_receiving();">
+<div id="sms_receiving"></div>
+

@@ -1,0 +1,39 @@
+<div id="sugnup_errors">
+	<table cellpadding=0 cellspacing=0 border=0 class="signup_errors_table">
+		<tr>
+			<td width=50%  align="right" valign="top" style="padding-left:50px;">
+				<%= error_messages_for 	:user,
+										:header_tag => "h2",
+										:class => "signup_error_class"
+				%>
+			</td>
+			<td width=50%  align="center" valign="top" style="padding-left:50px;">
+				<%= error_messages_for 	:user_professional_detail,
+										:header_tag => "h2",
+										:class => "signup_error_class"
+				%>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+<div align="right" style="padding-top:8px;">
+	<span align="left" class="really_big" style="padding-right:130px;">Doctor Registration Form</span><span class="really_big_small" style="padding-right:22px;" align="right">
+		Fields with <span class="mandatory_class">*</span> are mandatory
+	</span> </br></br>
+</div>
+
+<% form_for(:user,:html => { :multipart => true }) do |f| -%>
+
+  <table align="center" class="signup_table">
+   <tr><td width=50% valign="top">
+	  <%=render :partial=>'/account/account_fields_partial',:locals=>{:f => f,:requirement_type=>"Sign Up"}%>
+   </td>
+   <td valign="top">
+	  <%=render :partial=>'/account/account_prof_details_partial',:locals=>{:f => f,:requirement_type=>"Sign Up"}%>
+   </td></tr><tr><td>
+	  <%=render :partial=>'/account/submit_partial',:locals=>{:f => f,:requirement_type=>"Sign Up"}%>
+  </td></tr></table>
+
+<% end -%>

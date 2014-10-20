@@ -1,0 +1,260 @@
+<div align="center" class="sub_heading">Professional Details </br></br></div>
+
+<%user_professional_detail = @user.user_professional_detail%>
+
+<div id="proffesional_details" style="" >
+	<% fields_for :user_professional_detail,user_professional_detail do |u| -%>
+		<table align="center" valign="center" class="signup_inside_table" width=100%>
+		  <tr>
+		    <td>
+				<label for="designation">Designation/Employment</label>
+		  		<span class="mandatory_class">*</span>
+		    <td>
+				<%= u.text_field :designation %>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="specialization">Specialization</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+		    	<%= u.select :specialization,Specialization.all.collect {|s| [ s.name, s.id.to_s ] }.sort,{:include_blank => true}%>
+
+				<!-- u.select :specialization, [['Select from below',''],['Radiology','1'],['Medicine','2'],['Surgery','3'],['Orthopedics','4'],['Obstetrics & Gynaecology','5'],['E.N.T','6'],['Dentistry','7'],['Ophthalmology','8'],['Paediatrics','9'],['Dermatology','10'],['Psychiatry','11'],['Urology','12'],['Cardiology','13'],['Cardio-Thoracic Surgery','14'],['Neurology','15']]  -->				
+				<!-- select("user_professional_detail","specialization",Specialization.all.collect {|s| [ s.name, s.id ] }, {:selected => each_employee_registration["employee_id"]},{:id => "emp_#{each_employee_registration['id']}_list_value"} )  -->
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="qualification">Qualification</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+		    	<%=u.select :qualification, [['Select from below',''],['MBBS','MBBS'],['P.G. Diploma','PG Diploma'],['MD','MD'],['MS','MS'],['DNB (PG)','DNB PG'],['DM','DM'],['MCH','MCH'],['DNB (Superspecialization)','DNB Superspecialization']]%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="qualification">Relevant Certificate</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+				<%= u.file_field :uploaded_certificate,{:size=>10}%><br>
+				<% if requirement_type == "Edit" and user_professional_detail%>
+				  <br><%= link_to "Click Here to view the certificate", url_for(:controller=>'account',:action=>'get_certificate',:certificate_path => user_professional_detail.certificate.url(:original,false)),:popup => true%>
+				<% end %>
+				
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="institution_name">Institution Name</label>
+		  		<span class="mandatory_class">*</span>
+		    </td>
+		    <td>
+				<%= u.text_field :institution_name %>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="type_of_practice">Type Of Practice</label>
+			</td>
+		    <td>
+		    	<%= u.select :type_of_practice, [['Select from below',''],['Private','private_practice'],['Government','govt_practice'],['Medical Faculty','medical_faculty'],['NGO','ngo']]%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="medical_registration_number">Medical Registration Number</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+				<%= u.text_field :medical_registration_number%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="reporting_authority_and_designation">Reporting Authority Name and Designation</label>
+			</td>
+		    <td>
+				<%= u.text_field :reporting_authority_and_designation%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="working_dept">Working in which Department of the Hospital</label>
+			</td>
+		    <td>
+				<%= u.text_field :working_dept%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="years_of_exp">Years Of Experience</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+				<%=u.select :years_of_exp, [['Select from below',''],["  <  5 years","0_5"],['5 - 10 years','5_10'],['10 - 15 years','10_15'],['15 - 20 years','15_20'],['  >  20 years','20_30']]%>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="research_interest">Any Research Interest?</label>
+			</td>
+		    <td>
+				<% if requirement_type == "Edit" and user_professional_detail%>
+					Yes : <%= u.radio_button(:research_interest,1,{:onclick=>"bring_down_details('research_details')",:checked=>(user_professional_detail.research_interest ? true : false)})%> |
+					No : <%= u.radio_button(:research_interest,0,{:onclick=>"take_up_details('research_details')",:checked=>(!user_professional_detail.research_interest ? true : false)})%></br>
+				<%else%>
+					Yes : <%= u.radio_button(:research_interest,1,{:onclick=>"bring_down_details('research_details')"})%> |
+					No : <%= u.radio_button(:research_interest,0,{:onclick=>"take_up_details('research_details')",:checked=>true})%></br>
+				<%end%>
+			</td>
+		  </tr>
+
+		  <tr>
+		  	<td colspan="2">
+		  	  <%if requirement_type == "Edit" and user_professional_detail and user_professional_detail.research_interest%>
+		  	  	<div id="ssso_details" style="display:inline;" class="text_font">
+		  	  <%else%>
+		  		<div id="research_details" style="display:none" class="text_font">
+			  <%end%>
+		  			<table class="signup_inside_table_without_border" align="center" border=0>
+		  				<tr><td width=76% align="left">
+							<label for="research_details">Research Details</label><br/>
+						</td>
+					    <td>
+							<%= u.text_area :research_details,{:rows=>1,:cols=>30}%>
+						</td></tr>
+					</table>
+				</div>
+			</td>
+		  </tr>
+
+		  <tr>
+		    <td>
+				<label for="papers_published">Any Paper Publication</label>
+			</td>
+		    <td>
+				<%= u.text_area :papers_published,{:rows=>1,:cols=>30}%>
+			</td>
+		  </tr>
+
+		  <tr>
+		    <td>
+				<label for="special_training">Any Special Training Obtained?</label><br/>
+			</td>
+		    <td>
+				<% if requirement_type == "Edit" and user_professional_detail%>
+					Yes : <%= u.radio_button(:special_training,1,{:onclick=>"bring_down_details('special_training_details')",:checked=>(user_professional_detail.special_training ? true : false)})%> |
+					No : <%= u.radio_button(:special_training,0,{:onclick=>"take_up_details('special_training_details')",:checked=>(!user_professional_detail.special_training ? true : false)})%></br>
+				<%else%>
+					Yes : <%= u.radio_button(:special_training,1,{:onclick=>"bring_down_details('special_training_details')"})%> |
+					No : <%= u.radio_button(:special_training,0,{:onclick=>"take_up_details('special_training_details')",:checked=>true})%></br>
+				<%end%>
+			</td>
+		  </tr>
+		  <tr>
+		  	<td colspan="2">
+		  	  <%if requirement_type == "Edit" and user_professional_detail and user_professional_detail.special_training%>
+		  		<div id="special_training_details" style="display:inline;" class="text_font">
+		  	  <%else%>
+		  		<div id="special_training_details" style="display:none" class="text_font">
+			  <%end%>
+		  			<table class="signup_inside_table_without_border" align="center" border=0><tr>
+					    <td width=76% align="left">
+							<label for="special_training_details">Special Training Details</label><br/>
+						</td>
+					    <td>
+							<%= u.text_area :special_training_details,{:rows=>1,:cols=>30}%>
+						</td>
+		  			</tr></table>
+				</div></td>
+		  </tr>
+
+		  <tr height="35px">
+		    <td>
+				<label for="special_conf_attended">Any special Conference/Workshops <br>attended in the last one year?</label><br/>
+			</td>
+		    <td>
+				<% if requirement_type == "Edit" and user_professional_detail%>
+					Yes : <%= u.radio_button(:special_conf_attended,1,{:onclick=>"bring_down_details('special_conf_attended_details')",:checked=>(user_professional_detail.special_conf_attended ? true : false)})%> |
+					No : <%= u.radio_button(:special_conf_attended,0,{:onclick=>"take_up_details('special_conf_attended_details')",:checked=>(!user_professional_detail.special_conf_attended ? true : false)})%></br>
+				<%else%>
+					Yes : <%= u.radio_button(:special_conf_attended,1,{:onclick=>"bring_down_details('special_conf_attended_details')"})%> |
+					No : <%= u.radio_button(:special_conf_attended,0,{:onclick=>"take_up_details('special_conf_attended_details')",:checked=>true})%></br>
+				<%end%>
+
+			</td>
+		  </tr>
+		  <tr>
+		  	<td colspan="2">
+		  	  <%if requirement_type == "Edit" and user_professional_detail and user_professional_detail.special_conf_attended%>
+		  		<div id="special_conf_attended_details" style="display:inline;" class="text_font">
+		  	  <%else%>
+		  		<div id="special_conf_attended_details" style="display:none" class="text_font">
+			  <%end%>
+		  			<table class="signup_inside_table_without_border" align="center" border=0><tr>
+					    <td width=76% align="left">
+							<label for="special_conf_attended_details">Special Confernce/Workshop Details</label><br/>
+						</td>
+					    <td>
+							<%= u.text_area :special_conf_attended_details,{:rows=>1,:cols=>30}%>
+						</td>
+					  	</tr>
+					</table></div></td>
+		  </tr>
+
+		  <tr>
+		    <td>
+				<label for="own_clinic_or_hospital">Do you own a Clinic/Hospital?</label><br/>
+			</td>
+		    <td>
+				<% if requirement_type == "Edit" and user_professional_detail%>
+					Yes : <%= u.radio_button(:own_clinic_or_hospital,1,{:onclick=>"bring_down_details('own_clinic_div')",:checked=>(user_professional_detail.own_clinic_or_hospital ? true : false)})%> |
+					No : <%= u.radio_button(:own_clinic_or_hospital,0,{:onclick=>"take_up_details('own_clinic_div')",:checked=>(!user_professional_detail.own_clinic_or_hospital ? true : false)})%></br>
+				<%else%>
+					Yes : <%= u.radio_button(:own_clinic_or_hospital,1,{:onclick=>"bring_down_details('own_clinic_div')"})%> |
+					No : <%= u.radio_button(:own_clinic_or_hospital,0,{:onclick=>"take_up_details('own_clinic_div')",:checked=>true})%></br>
+				<%end%>
+			</td>
+		  </tr>
+		  <tr>
+		  	<td colspan="2">
+		  	  <%if requirement_type == "Edit" and user_professional_detail and user_professional_detail.own_clinic_or_hospital%>
+		  		<div id="own_clinic_div" style="display:inline;" class="text_font">
+		  	  <%else%>
+		  		<div id="own_clinic_div" style="display:none;" class="text_font">
+			  <%end%>
+				  	<table class="signup_inside_table_without_border" align="center" border=0><tr>
+				    <td width=76% align="left">
+							<label for="treatments_offered">What kind of Treatment is Offered?</label><br/>
+						</td>
+					    <td>
+							<%= u.text_area :treatments_offered,{:rows=>1,:cols=>30}%>
+						</td>
+				  	  </tr>
+				  	  <tr>
+					    <td>
+							<label for="equipments_available">What Equipments are available?</label><br/>
+						</td>
+					    <td>
+							<%= u.text_area :equipments_available,{:rows=>1,:cols=>30}%>
+						</td>
+				  	  </tr>
+				  	  <tr>
+					    <td>
+							<label for="beds_count">How Many Beds are there?</label><br/>
+						</td>
+					    <td>
+							<%= u.text_field :beds_count,{:size=>4}%>
+						</td>
+				  	  </tr>
+				  	</table>
+				</div></td>
+		  </tr>
+		</table>
+
+	<% end -%>
+</div>

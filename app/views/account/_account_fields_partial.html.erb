@@ -1,0 +1,231 @@
+
+<div align="center" class="sub_heading">Personal Details</br></br></div>
+
+	<table align="center" valign="center" class="signup_inside_table" border="0">
+	  <tr>
+	    <td>
+			<label for="login">Login Id</label>
+		  	<span class="mandatory_class">*</span>
+	    </td>
+	    <td>
+	  	  <% if requirement_type == "Edit"%>
+			<%= f.text_field :login,{:readonly => true} %>
+		  <%else%>
+			<%= f.text_field :login %>
+		  <%end%>
+		</td>
+	  </tr>
+	  <% if requirement_type != "Edit"%>
+		  <tr>
+		    <td>
+				<label for="password">Password</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+				<%= f.password_field :password %>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<label for="password_confirmation">Confirm Password</label>
+		  		<span class="mandatory_class">*</span>
+			</td>
+		    <td>
+				<%= f.password_field :password_confirmation %>
+			</td>
+		  </tr>
+	  <% end %>
+	  <tr>
+	    <td>
+			<label for="login">Full Name</label>
+	    </td>
+	    <td>
+			<%= f.text_field :full_name %>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="email">Email</label>
+		  	<span class="mandatory_class">*</span>
+		</td>
+	    <td>
+			<%= f.text_field :email %>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="age">Age</label>
+		  	<span class="mandatory_class">*</span>
+		</td>
+	    <td>
+			<%= f.text_field :age,{:size=>"2"}%>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="gender">Gender</label>
+		  	<span class="mandatory_class">*</span>
+		</td>
+	    <td width="150px">
+	    	<%if @user.gender == true or @user.gender.nil?%>
+				Male : <%= f.radio_button(:gender,1,{:checked=>true})%> |
+				Female : <%= f.radio_button(:gender,2)%>
+			<%else%>
+				Male : <%= f.radio_button(:gender,1)%> |
+				Female : <%= f.radio_button(:gender,2,{:checked=>true})%>
+			<%end%>
+		</td>
+	  </tr>
+
+	  <tr class="special_tr">
+	    <td colspan="2" align="left">
+		  <label for="contact_mob_no">Contact </label><br/>
+		  <table class="signup_inside_table_without_border" align="center" width="50%" border=0>
+		  	<tr>
+		  	  <td align="left" style="padding-left:15px;">
+				  Address <span class="mandatory_class">*</span>
+		  	  </td>
+		  	  <td width=50%>
+				<%= f.text_area :address,{:rows=>2,:cols=>30}%>
+		  	  </td>
+		  	</tr>
+	  		<tr>
+		  	  <td align="left" style="padding-left:15px;">
+				  Mobile Number <span class="mandatory_class">*</span>
+		  	  </td>
+		  	  <td width=50%>
+				<%= f.text_field :contact_mob_no %></br>
+		  	  </td>
+		  	</tr>
+		  	<tr>
+		  	  <td align="left"  style="padding-left:15px;">
+		  		Home Telephone Number 
+		  	  </td>
+		  	  <td>
+				<%= f.text_field :contact_home_no%>
+		  	  </td>
+		  	</tr>
+		  </table>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="sss_org_association">Association with Sri Sathya Sai Seva Organization</label><br/>
+		</td>
+	    <td>
+			<% if requirement_type == "Edit"%>
+				Yes : <%= f.radio_button(:sss_org_association,1,{:onclick=>"bring_down_details('ssso_details')",:checked => (@user.sss_org_association ? true : false)})%> |
+				No : <%= f.radio_button(:sss_org_association,0,{:onclick=>"take_up_details('ssso_details')",:checked => (!@user.sss_org_association ? true : false)})%></br>
+			<%else%>
+				Yes : <%= f.radio_button(:sss_org_association,1,{:onclick=>"bring_down_details('ssso_details')"})%> |
+				No : <%= f.radio_button(:sss_org_association,0,{:onclick=>"take_up_details('ssso_details')",:checked=>true})%></br>
+			<%end%>
+		</td>
+	  </tr>
+
+	  <tr>
+	  	<td colspan="2">
+	  	  <%if requirement_type == "Edit" and @user.sss_org_association%>
+	  	  	<div id="ssso_details" style="display:inline;" class="text_font">
+	  	  <%else%>
+	  	  	<div id="ssso_details" style="display:none" class="text_font">
+		  <%end%>
+	  	  <table class="signup_inside_table_without_border" align="left" border=0><tr>
+		    <td>
+				<label for="ssso_details">SSSO Association Details</label><br/>
+			</td>
+		    <td>
+				<%= f.text_area :sss_org_association_details,{:rows=>1,:cols=>30}%>
+			</td>
+	  	   </tr>
+	  	  </table></div>
+	  	</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="possible_freq_of_visit">Frequency of Visit</label><br/>(Once in how many months you can attend the service)
+		</td>
+	    <td>
+			<%= f.text_field :possible_freq_of_visit,{:size=>15}%>
+		</td>
+	  </tr>
+	  <tr height="60px">
+	    <td>
+			<label for="possible_duration_of_visit">Visit Duration</br>(In one session how many days can you serve)</label>
+		</td>
+	    <td>
+			<%= f.text_field :possible_duration_of_visit,{:size=>10}%>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="photo">Photo</label>
+		</td>
+
+	    <td>
+			<%= f.file_field :uploaded_picture,{:size=>10}%>
+			
+			<% if requirement_type == "Edit"%>
+			  <img id="click_to_see_image" src="/images/image.gif" onclick="show_image();" style="position:absolute;">
+			  <img id="changed_edit_image" style="display:none;position:absolute;z-index:10;padding-bottom:40;" src="<%= url_for(:controller=>'account',:action=>'get_picture')%>" width="100" height="100"/>			  
+			  <img id="cancel_image" onclick="hide_image();" src="/images/cancel_image_big_2.jpg" style="display:none;position:absolute;z-index:10;padding-left:87;" title="Close Image" width="12" height="12">
+			<% end %>
+		</td>
+	  </tr>
+
+	  <tr>
+	    <td>
+			<label for="volunteer_activity">Engaged in any voluntary Activity</label><br/>
+		</td>
+	    <td>
+	  	  <%if requirement_type == "Edit"%>
+			Yes : <%= f.radio_button(:volunteer_activity,1,{:onclick=>"bring_down_details('volunteer_activity_details')",:checked=>(@user.volunteer_activity ? true : false)})%> |
+			No : <%= f.radio_button(:volunteer_activity,0,{:onclick=>"take_up_details('volunteer_activity_details')",:checked=>(!@user.volunteer_activity ? true : false)})%></br>
+	  	  <%else%>
+			Yes : <%= f.radio_button(:volunteer_activity,1,{:onclick=>"bring_down_details('volunteer_activity_details')"})%> |
+			No : <%= f.radio_button(:volunteer_activity,0,{:onclick=>"take_up_details('volunteer_activity_details')",:checked=>true})%></br>
+		  <%end%>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td colspan="2">
+	  	  <%if requirement_type == "Edit" and @user.volunteer_activity%>
+	  	  	<div id="ssso_details" style="display:inline;" class="text_font">
+	  	  <%else%>
+	  		<div id="volunteer_activity_details" style="display:none" class="text_font">
+		  <%end%>
+	  			<table class="signup_inside_table_without_border" align="left" border=0>
+		  			<tr><td>
+					  <label for="volunteer_activity_details">Volunteer Activity Details</label><br/>
+					</td>
+				    <td>
+						<%= f.text_area :volunteer_activity_details,{:rows=>1,:cols=>30}%>
+					</td></tr>
+				</table>
+			</div>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="residing_disance_from_ptp">Residing Distance from Puttaparthi</label>
+		</td>
+	    <td>
+	    	<%= f.select :residing_disance_from_ptp, [['Select from below',''],['< 200 Kms','0_200'],['200 - 300 Kms','200_350'],['350 - 500 Kms','350_500'],['500 - 650 Kms','500_650'],['> 650 Kms','650_800']]%>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+			<label for="doctors_referral">Are you referred by a Doctor?</label><br/>
+		</td>
+	    <td>
+	  	  <%if requirement_type == "Edit"%>
+			Yes : <%= f.radio_button(:doctors_referral,1,{:checked=>(@user.doctors_referral ? true : false)})%> |
+			No : <%= f.radio_button(:doctors_referral,0,{:checked=>(!@user.doctors_referral ? true : false)})%></br>
+	  	  <%else%>
+			Yes : <%= f.radio_button(:doctors_referral,1)%> |
+			No : <%= f.radio_button(:doctors_referral,0,{:checked=>true})%></br>
+		  <%end%>
+		</td>
+	  </tr>
+
+	</td></tr></table>

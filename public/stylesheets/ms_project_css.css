@@ -1,0 +1,714 @@
+	background-image:url('/images/login_image.gif');
+	width:500px;
+	height:300px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	vertical-align: middle;
+}
+
+table.user_detail_class{
+	width:800px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+table.volunteers_detail_class{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+table.schedule_main_update_table{
+	border-radius: 4em;
+	border-bottom-color: #C8C8C8;
+}
+
+div.ajax_loader{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+div.schedule_location_names{
+	background-color:yellow;
+	align:center;
+	height:100px;
+	width:150px;
+	overflow:auto;
+	text-align:left;
+}
+
+div.all_schedule_class{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+div.schedule_message_class{
+	width:350px;
+	background-color:#EBEBEB;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+table.schedule_inside_table{
+	border-radius: 4em;
+	border-bottom-color: #C8C8C8;
+}
+
+td.heading_class{
+	height:26px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+td.schedule_inside_inactive_tab{
+	width:154;
+	height:30;
+	background-image:url("/images/table_tab_1_grey_white.gif");
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #535353;
+	font-weight: bold;
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+td.schedule_inside_hover_tab{
+	width:154;
+	height:30;
+	background-image:url("/images/table_tab_1_grey_white_hover.gif");
+	text-align: center;
+	color: #535353;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+td.schedule_inside_active_tab{
+	width:154;
+	height:30;
+	background-image:url("/images/table_tab_1_grey_black_backgrnd.gif");
+	text-align: center;
+	color: #e6e5e5;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+td.schedule_update_td{
+	width:775px;
+	height:350px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+tr.volunteer_schedule_tr{
+	background-image:url("/images/volunteer_schedule_middle_dark.gif");
+	height:20px;
+	width:800px;
+	background-position:left;
+	text-align: center;
+	color:#F5F5F5;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+tr.schedule_horizontal_line{
+	background-image:url("/images/schedule_row_bottom.gif");
+	width:800px;
+}
+
+.schedule_image_pointer_class{
+	cursor:pointer;
+}
+
+tr.schedule_a_prog_tr{
+	background-image:url("/images/schedule_table_middle_grey.gif");
+	height:20px;
+	width:800px;
+}
+
+tr.schedule_tr_1{
+	background-image:url("/images/schedule_table_middle_grey.gif");
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+tr.schedule_tr_2{
+	background-image:url("/images/schedule_middle_light.gif");
+	height:20px;
+	width:800px;
+	background-position:left;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+tr.schedule_th{
+	background-image:url("/images/schedule_table_middle_grey.gif");
+	width:800px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+td.user_detail_td_class{
+	padding-left:20px;
+	text-align:left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border-bottom:medium;
+}
+
+td.user_detail_td_bold_class{
+	padding-left:20px;
+	text-align:left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	text-decoration:underline;
+	font-size: 12px;
+}
+
+.area_shape_class{
+	border-color: red;
+}
+
+.class1{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #FFFFFF;
+	text-align: left;
+	font-weight: normal;
+	line-height: 14px;
+}
+
+.change_password_subheading{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-align: center;
+	font-weight: bold;
+}
+
+.side_headings{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 14px;
+}
+
+.side_headings_2{
+	font-family: Arial;
+	font-size: 11pt;
+	color: #182E59;
+	font-weight: bold;
+	line-height: 14px;
+/*	background-color:#EEF2F9;182E59*/
+}
+
+.side_headings_big{
+	font-family: Arial;
+	font-size: 16pt;
+	color: #182E59;
+	font-weight: bold;
+	line-height: 14px;
+}
+
+.class2{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	line-height: 14px;
+}
+
+body { background-color: #E1E1E1}
+
+.mandatory_color{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: red;
+}
+
+.text_font{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	text-align: center;
+	font-weight: normal;
+	line-height: 14px;
+	border: 1;
+}
+
+.left_text_font{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	line-height: 14px;
+	border: 1;
+}
+
+.salutation{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	align: left;
+	text-align: left;
+	font-weight: normal;
+	line-height: 14px;
+	border: 1;
+}
+
+.message_font{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-align: left;
+	font-weight: bold;
+	line-height: 14px;
+	border: 1;
+}
+
+table.alerts{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #404040;
+	width: 75%;
+	height: 550px;
+	background-color: #C3C3C3;
+	background-image:url('/images/teble_bg_image.jpg');
+}
+
+table.change_password_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	width: 95%;
+	border: 1px #000000 solid;
+	border-spacing: 10px;
+	cellspacing: 0px;
+}
+
+table.signup_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	width: 95%;
+	text-align: center;
+	border: 1px #000000 solid;
+	border-collapse: collapse;
+	border-spacing: 10px;
+	cellspacing: 0px;
+}
+
+table.signup_errors_table{
+	width: 90%;
+	border: 1px #000000 solid;
+	border-collapse: collapse;
+	border-spacing: 10px;
+	cellspacing: 0px;
+}
+
+.really_big{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 14pt;
+	color: #000000;
+}
+
+.really_big_small{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 8pt;
+	color: #000000;
+}
+
+.sub_heading{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 10pt;
+	color: #000000;
+}
+
+.unapproved_users{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: yellow;
+	text-align: center;
+}
+
+table.signup_inside_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	width: 95%;
+	text-align: left;
+	border: 1px #000000 solid;
+	border-collapse: collapse;
+	border-spacing: 10px;
+	cellpadding: 5px;
+}
+
+input[type=text]{
+  width:100px;
+}
+
+input[type=password]{
+  width:100px;
+}
+
+textarea{
+  width:100px;
+}
+
+table.signup_inside_table_without_border{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	width: 90%;
+	text-align: center;
+}
+
+tr.special_tr{
+	width: 75%;
+	border: 1px #000000 solid;
+}
+
+table.table3{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	text-align: center;
+	font-size: 11px;
+	background-image:url('/images/table_borde_3.jpg');
+    border-top: blank;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    border-left: 1px solid;
+}
+
+table.s_cart{
+	padding-right: 10;
+    border-bottom: 1px;
+    border-top: 1px;
+    border-right: 1px;
+    border-left: 1px;
+	empty-cells: show;
+}
+
+table.checkout_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+table.top_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	line-height: 14px;
+    border-bottom: blank;
+    border-top: 1px;
+    border-right: 1px;
+    border-left: 1px;
+}
+
+table.payment_table{
+	padding-left: 20;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+    border-bottom: 1px;
+    border-top: 1px ;
+    border-right: 1px ;
+    border-left: 1px ;
+	empty-cells: show;
+}
+
+table.books_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	text-align: center;
+	padding-left: 10;
+	padding-right: 10;
+    border-bottom: 1px;
+    border-top: 1px ;
+    border-right: 1px ;
+    border-left: 1px ;
+	empty-cells: show;
+}
+
+table.books_table th{
+	border-width: 1px 1px 1px 1px;
+	border-style: inset inset inset inset;
+	border-color: black black black black;
+}
+
+table.table5 td{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	vertical-align: top;
+    border-bottom: 1px;
+    border-top: 1px ;
+    border-right: 1px ;
+    border-left: 1px ;
+}
+
+.bigger_text_font{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13pt;
+	color: #000000;
+	text-align: center;
+	font-weight: normal;
+	line-height: 14px;
+	border: 1;
+}
+
+.news_and_events_marquee{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13pt;
+	color: #69696A;
+	text-align: center;
+	font-weight: normal;
+}
+
+.remember_me_class{
+	color: #8A662A;	
+	font-family:Arial;	
+	font-size:11px;
+	font-weight:bold;
+}
+
+.signup_error_class{
+	color: #8A662A;	
+	font-family:Arial;	
+	font-size:11px;
+	font-weight:bold;
+	text-align:left;
+}
+
+.fieldWithErrors{
+	background-color: #ffd4aa;
+}
+
+.active_user_message_class{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 6pt;
+	color: #FFFFFF;
+	text-align: center;
+	font-weight: normal;
+}
+
+.user_message_class_2{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 6pt;
+	color: #031741;
+	text-align: center;
+	font-weight: normal;
+}
+
+.user_message_class_1{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 6pt;
+	color: #FFFFFF;
+	text-align: center;
+	font-weight: normal;
+}
+
+.doc_profile_name{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #000000;
+	text-align: center;
+	font-weight: bold;
+}
+
+.doc_profile_general{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-align: center;
+	font-weight: normal;
+}
+
+.doctor_profile_left_pad{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	padding-left: 25px;
+}
+
+.doc_profile_name_list{
+	text-align: center;
+	font-weight: bold;
+	border: 3px solid #c7c7c7;
+	border-radius: 100px; -moz-border-radius: 100px; -webkit-border-radius: 100px;
+	font: italic 15px Georgia; color: #000000;
+	outline: none; /*Remove Chrome and Safari glows on focus*/
+	padding:5px;
+}
+
+td.doctor_profile_hr{
+	border-top:solid;
+	border-top-width:thin;
+	padding-top:10px;
+}
+
+.doctor_profile_background{
+	background-color: #FFFFFFF;
+}
+
+.doctor_profile_side_heading{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	font-weight: bold;
+}
+
+.doctor_profile_header{
+	font-family: Times;
+	font-size: 16pt;
+	color: #000000;
+	font-weight: bold;
+}
+
+table.doctor_profile_outside_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	border: 1px #000000;
+	border-style: solid;
+	border-spacing: 10px;
+	cellspacing: 0px;
+}
+
+table.doctor_profile_inside_table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	border: 1px #000000 double;
+	border-spacing: 10px;
+	cellspacing: 0px;
+}
+
+table.doctor_layout{
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #404040;
+	width: 75%;
+	height: 550px;
+	background-color: #B4B4B4;
+/*	background-image:url('/images/teble_bg_image.jpg'); */
+}
+
+.mandatory_class{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	color: red;
+}
+
+.specializations_filter_class{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	-moz-border-radius: 10px;
+    -moz-box-shadow: -4px -5px 10px #333;
+	border: 1px solid #000;
+    background-color:#A7A5A5;	
+	text-decoration:none;
+	width:40%;
+	padding-left:10px;
+	position:absolute;
+	z-index:10;
+	display:none;
+}
+
+.specialization_list_filter_class{}
+
+.user_rating_outer_class{
+	width:100px;
+	padding:2px;
+	padding-left:4px;
+	padding-right:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+
+.inner_rating_class{
+	background: -moz-linear-gradient(left, #55aaee, #003366);
+	background: -webkit-gradient(linear, left 0, right 0, from(#55aaee), to(#003366));
+}
+
+.inner_rating_text_class{
+	color:#000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/*
+	NAV
+*/
+#nav                                        { list-style: none; overflow: hidden; margin: 0 0 22px 0; }
+#nav li                                     { display: inline; }
+#nav li a                                   { display: block; float: left; padding: 8px; text-decoration: none; }
+#nav li a:hover,
+#calendar #nav li.cal a,
+#image #nav li.img a,
+#text #nav li.txt a,
+#use #nav li.use a,
+#double #nav li.dbl a                       { background: #444; color: white; }
+
+#dl                                         { position: absolute; top: 15px; right: 15px; text-decoration: none; background: #222; color: white; -moz-border-radius: 4px; -webkit-border-radius: 4px; padding: 3px 8px; }
+#dl:hover                                   { background: #999; }
+
+#wrap, #wrap2   							{ width: 600px; position: relative; }
+#small, #small2								{ position: relative; width: 100%; }
+#large, #large2    							{ background: white; position: relative; width: 600px; }
+#mover, #mover2								{ position: absolute; top: 150px; left: 150px; width: 150px; height: 150px; overflow: hidden; z-index: 100; background: white; display: none; }
+#overlay, #overlay2							{ top: 300; left: 0;border: 3px solid blue; width: 140px; height: 100px; position: absolute; z-index: 200; }
+

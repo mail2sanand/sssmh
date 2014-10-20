@@ -1,0 +1,263 @@
+<% end_date = @end_date.to_s < Date.today.strftime("%Y-%m-%d")%>
+
+  <table id="schedule_detail_table_id_<%=schedule_id%>" class="volunteers_detail_class" border=0 cellpadding=0 cellspacing=0>
+  	<tr>
+  		<td colspan=2 onmousedown="$('#update_volunteers_details_'+<%=schedule_id%>).draggable();" onmouseup="$('#update_volunteers_details_'+<%=schedule_id%>).draggable('destroy');">
+  			<img id="top_row_<%=schedule_id%>" src="/images/volunteer_detail_top.gif" usemap="#Map_<%=page_for%>_<%=schedule_id%>" border=0 >
+			<map name="Map_<%=page_for%>_<%=schedule_id%>">
+			<%if page_for == "display_volunteered_docs"%>
+				  <area shape="rect" coords="370,0,390,390" title="Close" onclick="take_up_details('update_volunteers_details_<%=schedule_id%>');" onmouseover="this.style.cursor='pointer';">
+				</map>
+			<%else%>
+				  <area shape="rect" coords="370,0,390,390" title="Close" onclick="take_up_details('non_volunteered_docs_for_<%=schedule_id%>');" onmouseover="this.style.cursor='pointer';">
+				</map>
+			<%end%>
+		</td>
+	</tr>
+	<tr background="/images/volunteer_detail_middle.gif">
+		<td colspan=2 class="user_detail_td_bold_class">
+			<%= volunteer_message%>
+				<div style="float:right;padding-right:4px;vertical-align:top;cursor:pointer;">
+				  <img src="/images/volunteer/filter_search_image.png" onclick="$('#filter_div_for_<%=page_for%>_<%=schedule_id%>_specializations').toggle(1000);">
+				</div>
+				<div id="invited_docs_message_div" style="display:none;position:absolute;"></div>
+				
+						<!-- This is the script to evaluate the Display an Hide the Specializations  -->
+							  <script type="text/javascript">
+							  	
+							  	function display_corresponding_users(page_for){
+								 var all_users = document.getElementById(page_for+'_all_users').value.split(",");
+								 
+								  // This block is to show all the checked options.
+								  $('input[type=checkbox].'+page_for+'_specializations_filter_checkbox_class').each(function(){
+									 if($(this).is(':checked')){
+									   var users = $(this).attr('value').split("_")[1].split("-");
+									   for(i=0;i<users.length;i++){
+									   	 all_users.splice(all_users.indexOf(users[i]),1);
+										 var div_to_show = page_for+'_'+users[i]+'_div';
+									 	 var invited_div_to_show = 'invited_user_'+users[i]+'_div';
+										 
+										 if($('#'+div_to_show).length > 0){
+										 	$('#'+div_to_show).show("fast");
+										 }else{
+										 	$('#'+invited_div_to_show).show("fast");
+										 }
+									   }
+									 }
+								  });
+								  
+								  // This block is to hide all other unchecked Options
+								  for(j=0;j<all_users.length;j++){
+									var div_to_hide = page_for+'_'+all_users[j]+'_div';
+								 	var invited_div_to_hide = 'invited_user_'+all_users[j]+'_div';
+									//alert($('#'+div_to_hide).length);
+								 	//$('#'+div_to_hide).hide("fast");
+									
+									if($('#'+div_to_hide).length > 0){
+									 	$('#'+div_to_hide).hide("fast");
+									}else{
+									 	$('#'+invited_div_to_hide).hide("fast");
+									}
+								  }
+								}
+							  </script>
+						<!-- End of the Script  -->
+									  
+				<!-- Starting of the User Specializations Filter Div -->
+					<div id="filter_div_for_<%=page_for%>_<%=schedule_id%>_specializations" class="specializations_filter_class" style="top:50px;left:<%if page_for == 'display_volunteered_docs'%>420<%else%>360<%end%>px;">
+					<table cellpadding=0 cellspacing=0 border=0 width="100%">
+						<%i=0%>
+						<input type="hidden" id="<%=page_for%>_all_users" value="<%=user_specializations.values.map(&:second).flatten.join(',')%>">
+						<tr><td><div style="float:right;"><input type="checkbox" checked="checked" onchange="clear_select_all_specs(this.id,'<%=page_for%>');" id="<%=page_for%>_all_specs"></div></td></tr>
+
+						<%for each_user_specialization in user_specializations.keys%>
+							  <tr>
+								<td align="center" width="50%">	
+									<div style="float:left;">
+									  <%spec_name = each_user_specialization.split(/\.|\s/).map(&:capitalize).join(" ")%>
+									  <span style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size:10px;" class="specialization_list_filter_class" title="<%=spec_name%>">
+									  	<%=truncate(spec_name,:length => 16)%>(<%=user_specializations[each_user_specialization][1].size%>)
+									  </span>
+									  
+									</div>
+									
+									<div style="float:right;padding-right:15px;">
+									  <input checked="checked" type="checkbox" class="<%=page_for%>_specializations_filter_checkbox_class" value="<%=each_user_specialization%>_<%=user_specializations[each_user_specialization][1].join('-')%>" onchange="display_corresponding_users('<%=page_for%>');">
+									</div><div style="float:right;padding-right:4px;">:</div>
+									<%i+=1%>
+								</td>
+							  </tr>
+						<%end%>
+					</table>
+				</div>
+				<!-- End of the User Specializations Filter Div -->
+				
+			<div id="<%=page_for%>_div" style="display:none;position:absolute;"></div><br><br>
+		</td>
+	</tr>
+	<%if users_volunteered_for_this_schedule.size != 0%>
+	  <tr background="/images/volunteer_detail_middle.gif"><td colspan=2>
+	  <%if users_volunteered_for_this_schedule.size > 2%>
+	   <div style="width:392px;height:130px;overflow-y:auto;" id="">
+	  <%else%>
+	   <div>
+	  <%end%>
+		<%for user in users_volunteered_for_this_schedule%>
+			<div id="<%=page_for%>_<%=user[:user_id]%>_div">
+				
+				<table cellpadding=0 cellspacing=0 border=0 width="99%">
+				<tr background="/images/volunteer_detail_middle.gif" id="<%=page_for%>_<%=user[:user_id]%>_tr">
+				   <td align="left" class="user_detail_td_class" width="45%">
+				   	<%doc_name = user[:full_name].split(" ").map(&:capitalize).join(" ")%>
+					<%= doc_name %> (<%= user[:gender] ? "M" : "F"%>/<%= user[:age]%>)</br> 
+					<%= user[:specializations]%><br>
+					 
+					<div style="height:11px;background-color:#A0A0A3;" class="user_rating_outer_class" id="outer_rating_div_for_<%=user[:user_id]%>" title="<%= doc_name%>'s Rating  :  <%= User.rating(user[:user_id])%>%">
+						<div class="inner_rating_class" style="width:<%= User.rating(user[:user_id])%>px;height:11px;vertical-align:top;" id="inner_rating_div_for_<%=user[:user_id]%>" align="right">
+							<span class="inner_rating_text_class" style="font-size:7pt;color:#ffffff;"><%= User.rating(user[:user_id])%>%</span>
+						</div>
+					</div>
+				  </td>
+				  <td class="user_detail_td_class" valign="middle" align="center">
+				  	<div id="image_pack_for_<%=page_for%>_<%=user[:user_id]%>" style="vertical-align:text-top;">
+					    <img id="changed_edit_image_<%=user[:user_id]%>" style="padding-right:60px;" src="<%= url_for(:controller=>'account',:action=>'get_picture',:user_id=>user[:user_id])%>" width="40" height="40"/>
+						<%if page_for == "display_un_volunteered_docs"%>
+							<% if user[:approved]%>
+						  		<img src="/images/invite_doctor.gif" style="padding-bottom:10px;" border=0 title="Invite <%= user[:full_name].capitalize%>" onmouseover="this.style.cursor='pointer';" onclick="invite_this_doctor_for_a_schedule('<%=user[:user_id]%>','<%=schedule_id%>','<%=programme_name%>');">
+							<%else%>
+								<img src="/images/not_approved.gif" style="padding-bottom:8px;" border=0 title="<%= user[:full_name].capitalize%> not yet approved" onmouseover="this.style.cursor='pointer'" width="25px" height="25px">
+							<%end%>
+						<%else%>
+							<%if user[:status] == 1%>
+								<%if user[:invited] == "Invited and Volunteered"%>
+									<img src="/images/schedule/i_&_a.png" border=0 title="<%= user[:full_name].capitalize%> has accepted invitation" onmouseover="this.style.cursor='pointer';">
+								<%else%>
+									<img src="/images/approve.png" border=0 title="<%= user[:full_name].capitalize%> is approved" onmouseover="this.style.cursor='pointer';">
+								<%end%>
+							<%elsif user[:status] == -1%>
+								<img src="/images/reject.png" border=0 title="<%= user[:full_name].capitalize%> is rejected" onmouseover="this.style.cursor='pointer';">
+							<%else%>
+								<%if end_date%>
+									<img src="/images/schedule/volnt_not_approved.gif" title="Volunteered but not approved" onmouseover="this.style.cursor='pointer';">
+								<%else%>
+									<img src="/images/schedule/volunteer_appr.png" border=0 title="Approve <%= user[:full_name].capitalize%> for &quot;<%=programme_name%>&quot;" onmouseover="this.style.cursor='pointer';" onclick="approve_reject_this_doc_for_schedule('<%=user[:user_id]%>','<%=schedule_id%>','<%=programme_name%>','approve');">
+									<img src="/images/schedule/volunteer_rej.png" border=0 title="Reject <%= user[:full_name].capitalize%> for &quot;<%=programme_name%>&quot;" onmouseover="this.style.cursor='pointer';"  onclick="approve_reject_this_doc_for_schedule('<%=user[:user_id]%>','<%=schedule_id%>','<%=programme_name%>','reject');">
+								<%end%>
+							<%end%>
+						<%end%>
+					</div>
+				  </td>
+				</tr>
+			  <tr background="/images/volunteer_detail_middle.gif">
+				<td colspan=2><%="---"*25%>
+				</td>
+			  </tr></table>
+			</div>
+		<%end%>
+		<img src="/images/ajax-loader.gif" border=0 style="display:none;position:absolute;z-index:30;" id="invite_docs_popup_<%=schedule_id%>">
+	   </div>
+	  </td></tr>
+	<%else%>
+		<tr background="/images/volunteer_detail_middle.gif">
+		  <td align="left" class="user_detail_td_class" colspan=2>
+			<%if page_for == "display_un_volunteered_docs"%>
+				No doctors have registered or<br> All the doctors have been invited or<br> All doctors have volunteered<br><br> 
+			<%else%>
+				No doctors have volunteered for the "<%=programme_name%>" programe.<br><br>
+				<img src="/images/ajax-loader.gif" border=0 style="display:none;position:absolute;z-index:30;padding-left:150px;" id="invite_docs_popup_<%=schedule_id%>">
+			<%end%>
+		</td></tr>
+	<%end%>
+
+<!-- This is the display block for Invited Doctors by the Administrator-->
+			
+			<%if page_for == "display_volunteered_docs"%>
+			  <div id="invited_doctors_div">
+				<tr background="/images/volunteer_detail_middle.gif">
+					<td class="user_detail_td_bold_class" colspan=2>
+						Invited Doctors<br><br>
+					</td>
+				</tr>
+				<%if users_invited_for_this_schedule.size != 0%>
+					<%i=1%>
+				  <tr background="/images/volunteer_detail_middle.gif"><td colspan=2>
+				  <%if users_invited_for_this_schedule.size > 2%>
+				   <div style="width:392px;height:130px;overflow-y:auto;" id="">
+				  <%else%>
+				   <div>
+				  <%end%>
+					<%for invited_user in users_invited_for_this_schedule%>
+						<div id="invited_user_<%=invited_user[:user_id]%>_div"><table cellpadding=0 cellspacing=0 border=0 width="99%">
+							<tr background="/images/volunteer_detail_middle.gif">
+							  <td align="left" class="user_detail_td_class" width="">
+							  	<%invited_doc_name = invited_user[:full_name].split(" ").map(&:capitalize).join(" ")%>
+								<%= invited_doc_name%> (<%= invited_user[:gender] ? "M" : "F"%>/<%= invited_user[:age]%>)</br> 
+								<%= invited_user[:specializations]%> <br>
+								
+					<div style="height:11px;background-color:#A0A0A3;" class="user_rating_outer_class" id="outer_rating_div_for_<%=invited_user[:user_id]%>" title="<%= invited_doc_name%>'s Rating  :  <%= User.rating(invited_user[:user_id])%>%">
+						<div class="inner_rating_class" style="width:<%= User.rating(invited_user[:user_id])%>px;height:11px;vertical-align:top;" id="inner_rating_div_for_<%=invited_user[:user_id]%>" align="right">
+							<span class="inner_rating_text_class" style="font-size:7pt;color:#ffffff;"><%= User.rating(invited_user[:user_id])%>%</span>
+						</div>
+					</div>
+							  </td>
+							  <td class="user_detail_td_class" valign="middle" align="left" width="200px;">
+							    <img id="changed_edit_image_<%=invited_user[:user_id]%>" style="" src="<%= url_for(:controller=>'account',:action=>'get_picture',:user_id=>invited_user[:user_id])%>" width="40" height="40"/>
+								<span style="padding-left:70px;">
+									<%if invited_user[:invited] == "Invited and Rejected"%>
+									  <img src="/images/schedule/i_&_r.png" border=0 title="Invited and Rejected" onmouseover="this.style.cursor='pointer';">
+									<%elsif invited_user[:invited] == "Invited and Waiting"%>
+									  <%if end_date%>
+										  <img src="/images/schedule/i_&_w.png" border=0 title="Invited and Waiting" onmouseover="this.style.cursor='pointer';">
+									  <%else%>
+										  <img src="/images/schedule/i_&_w.png" border=0 title="Invited and Waiting" onmouseover="this.style.cursor='pointer';" onclick="$('#invitations_options_for_<%=invited_user[:user_id]%>').toggle('slow')">
+										  	<!-- The options for "Admin's override of invitations" will be displayed only when the invitation is pending -->
+											<div style="float:right;padding-right:35px;padding-top:7px;display:none;" id="invitations_options_for_<%=invited_user[:user_id]%>">
+												<img src="/images/Invitation/invitation_tick.png" title="Interested" style="cursor:pointer;" onclick="accept_reject_invitation('<%=schedule_id%>','<%=programme_name%>','','admin','accept','<%=invited_user[:user_id]%>');"><br>
+												<img src="/images/Invitation/invitation_cross.png" title="Not Interested" style="cursor:pointer;" onclick="accept_reject_invitation('<%=schedule_id%>','<%=programme_name%>','','admin','reject','<%=invited_user[:user_id]%>');">
+											</div>
+									  <%end%>
+									<%end%>
+								</span>
+							  </td>
+							</tr>
+							<tr background="/images/volunteer_detail_middle.gif">
+								<td colspan=2><%="---"*25%>
+								</td>
+							</tr></table>
+						</div>
+						<%i = i+1%>
+					<%end%>
+				  </div></td></tr>
+				<%else%>
+					<tr background="/images/volunteer_detail_middle.gif">
+					  <td align="left" class="user_detail_td_class" colspan=2>
+						<div id="no_docs_invited">No doctors have been invited.</div>
+					</td></tr>
+				<%end%>
+		      </div>
+			<%end%>
+<!-- End of the Invited Doctors block -->
+
+	<%if page_for == "display_volunteered_docs"%>
+		<%if end_date%>
+	  	  <tr style="background-image:url('/images/volunteer_detail_bottom_inv.gif');height:30px;">
+	  		<td colspan=2 align="right">
+			  <img src="/images/invite_button_25.gif" border=0 title="Programe completed on <%=@end_date%>" onmouseover="this.style.cursor='pointer';" style="padding-right:4px;padding-bottom:2px;">
+		<%else%>
+	  	  <tr>
+	  		<td colspan=2>
+	  				<img border=0 src="/images/volunteer_detail_bottom_inv.gif" usemap="#Map2_invite_<%=schedule_id%>">
+					<map name="Map2_invite_<%=schedule_id%>">
+						<area shape="circle" coords="380,15,10" onclick="invite_other_docs('<%=schedule_id%>','<%=programme_name%>');" title="Invite Doctors" onmouseover="this.style.cursor='pointer';"></area>
+					</map>
+			  		<div id="non_volunteered_docs_for_<%=schedule_id%>" style="display:none;position:absolute;top:50px;left:200px;"></div>
+		<%end%>
+	<%else%>
+			<img border=0 src="/images/volunteer_detail_bottom_no_inv.gif">
+	<%end%>
+		</td>
+	</tr>
+  </table>
+
+
+  

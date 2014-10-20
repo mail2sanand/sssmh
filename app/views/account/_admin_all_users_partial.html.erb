@@ -1,0 +1,68 @@
+<%all_users = user%>
+
+  <%if to_be_approved%>
+    <% if all_users.size > 2%>
+  		<div id="users_to_be_approved_div" style="overflow-y:auto;height:200px;">
+	<%else%>
+  		<div id="users_to_be_approved_div">
+	<%end%>
+	<table id="users_to_be_approved_table" class="signup_inside_table" border=1>
+  <%else%>
+    <% if all_users.size > 2%>
+	  	<div id="approved_users_div" style="overflow-y:auto;height:200px;">
+	<%else%>
+	  	<div id="approved_users_div">
+	<%end%>
+	<table id="approved_users_table" class="signup_inside_table" border=1>
+  <%end%>
+		 <tr>
+		   <th>User Name</br>(Gender/Age)</th>
+		   <th>Email</th>
+		   <th>Specialization / <br>User Rating / <br> Qualfication Certificate</th>
+		   <th>Contact No.</br>(Mobile/Home)</th>
+		   <th align="center">Photo</th>
+		   <th align="center"><%= to_be_approved ? "Approve":"Reject /<br> Print"%></th>
+		 </tr>
+		 <%for each_user in all_users%>
+		 
+		  <tr>
+		  	<td style="cursor:pointer;" title="Click to see <%=each_user.full_name%> details in Brief" onclick="show_user_details(<%=each_user.user_id%>,event);">
+			 <%=each_user.full_name%></br><%=each_user.gender ? "M" : "F"%>/<%=each_user.age%>
+			</td>
+		  	<td>
+				<%=each_user.email%>
+			</td>
+		  	<td>
+		  		<% each_user_professional_detail = each_user.user_professional_detail%>
+				<%=each_user_professional_detail.nil? ? "" : each_user_professional_detail.get_specialization%>
+				<br>
+				<%=User.rating(each_user.user_id)%>%<br>
+				<%if !each_user_professional_detail.nil? and !each_user_professional_detail.certificate_file_name.nil?%>
+				  <%= link_to"Click Here to view the certificate", url_for(:controller=>'account',:action=>'get_certificate',:certificate_path => each_user_professional_detail.certificate.url),:popup => true%>
+				<%else%>
+				  No certificate for this doctor.
+				<%end%>
+			</td>
+		  	<td>
+			  <div id="user_detail_id_<%=each_user.user_id%>" style="display:none;z-index:10;position:absolute;">
+			    <%= render :partial => '/account/user_details_partial',:locals => {:user => each_user, :user_professional_detail => each_user_professional_detail, :div_id => 'user_detail_id_'+each_user.user_id.to_s}%>
+			  </div>
+			  
+			  <%=each_user.contact_mob_no%> / <br><%=each_user.contact_home_no%>
+			</td>
+		  	<td align="center">
+			    <img id="image_<%=each_user.user_id%>" src="<%= url_for(:controller=>'account',:action=>'get_picture',:user_id=>each_user.user_id)%>" width="50" height="50"/>
+			</td>
+		  	<td align="center">
+		  		<%if to_be_approved%>
+			  		<input type="checkbox" id="<%=each_user.id%>_approve_checkbox" class="approve_checkbox_class" value="<%=each_user.id%>">
+			  	<%else%>
+			  	    <%unless each_user.login == "admin"%>
+			  		  <input type="checkbox" id="<%=each_user.id%>_reject_checkbox" class="reject_checkbox_class" value="<%=each_user.id%>">
+			  		<%end%>
+			  	<%end%>
+			</td>
+		  </tr>
+		 <%end%>
+		</table>
+	</div>

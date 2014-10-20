@@ -1,0 +1,2 @@
+$("#non_volunteered_docs_for_<%=@schedule_id%>").html("<%= escape_javascript(render :partial => '/schedule/volunteer_invite_partial', :locals => {:users_volunteered_for_this_schedule => @non_volunteered_docs, :programme_name => @programme_name, :schedule_id => @schedule_id, :volunteer_message => "Non-Volunteered Doctors for '#{@programme_name}' programme", :page_for => 'display_un_volunteered_docs',:user_specializations => @user_specializations})%>");
+$("#non_volunteered_docs_for_<%=@schedule_id%>").slideDown(1000);

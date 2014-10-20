@@ -1,0 +1,119 @@
+					<%if schedule_type == 'active'%>
+					  <div id="all_schedules" class="">
+					<%else%>
+					  <div id="all_<%=schedule_type%>_schedules" class="">
+					<%end%>
+						<% for each_schedule in schedules%>
+						  <%if each_schedule[:user_is_volunteer] or each_schedule[:user_message] == "Invited and Volunteered"%>
+					  	    <div id="schedule_div_<%=each_schedule[:id]%>">
+						  	  <tr class="volunteer_schedule_tr" id="schedule_tr_<%=each_schedule[:id]%>">
+						  <%else%>
+						    <%if i%2 == 1%>
+							  	<div id="schedule_div_<%=each_schedule[:id]%>">
+							  	  <tr class="schedule_tr_1" id="schedule_tr_<%=each_schedule[:id]%>">
+							<%else%>
+							  	<div id="schedule_div_<%=each_schedule[:id]%>">
+							  	  <tr class="schedule_tr_2" id="schedule_tr_<%=each_schedule[:id]%>">
+							<%end%>
+						  <%end%>
+								<td>
+									<%if user_type == 1 and each_schedule[:end_date].to_s < Date.today.strftime("%Y-%m-%d")%>
+									  <img src="/images/done-1.gif" border=0 style="position:relative;z-index:10px;float:left;top:-8px;left:4px;">
+									<%end%>
+									<%=each_schedule[:programme_name]%>
+									<div id="update_volunteers_details_<%=each_schedule[:id]%>" style="display:none;z-index:3;position:absolute;padding-left:50px;" ></div>
+								</td>
+								<td><%=each_schedule[:location_id]%></td>
+								<td align="center">
+									<%=each_schedule[:start_date].strftime("%b %d, %Y")%>
+									<img src="/images/ajax-loader-2.gif" border=0 style="display:none;position:absolute;z-index:30;" id="schedule_ajax_loader_for_<%=each_schedule[:id]%>">
+								</td>
+								<td><%=each_schedule[:end_date].strftime("%b %d, %Y")%></td>
+								<td><%=each_schedule[:specializations]%></td>
+								<%if user_type == 1%>
+									<td colspan=2 >
+									  <div id="check_volunteers_div_<%=each_schedule[:id]%>">
+										<img src="/images/volunteers.png" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="view_volunteers_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','<%=each_schedule[:end_date]%>');" title="View volunteers for <%=each_schedule[:programme_name]%>">
+									  </div>
+									</td>
+								<%else%>
+									<td colspan=2 valign="center">
+									  <div id="volunteer_image_div_<%=each_schedule[:id]%>">
+									  	<%if user_approved%>
+										  <%if each_schedule[:end_date].to_s < Date.today.strftime("%Y-%m-%d")%>
+										    <img src="/images/done-1_35.gif" border=0 title="Programe completed on <%=each_schedule[:end_date]%>" onmouseover="this.style.cursor='pointer';">
+										  <%else%>
+										  	  <%if each_schedule[:user_is_invited]%>
+											    <% if each_schedule[:user_message] == "Invited and Volunteered"%>
+												    <%if i%2 == 1%>
+														<img src="/images/schedule/i_&_a.png" style="cursor:pointer" id="invite_volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_1','in_volunteer');" title="Un-Volunteer for the invited programme <%=each_schedule[:programme_name]%>">
+													<%else%>
+														<img src="/images/schedule/i_&_a.png" style="cursor:pointer" id="invite_volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_2','in_volunteer');" title="Un-Volunteer for the invited programme <%=each_schedule[:programme_name]%>">
+													<%end%>
+												<% elsif each_schedule[:user_message] == "Invited and Rejected"%>
+												    <%if i%2 == 1%>
+														<img src="/images/schedule/i_&_r.png" style="cursor:pointer" id="invite_reject_schedule_<%=each_schedule[:id]%>"  title="invited and Rejected">
+													<%else%>
+														<img src="/images/schedule/i_&_r.png" style="cursor:pointer" id="invite_reject_schedule_<%=each_schedule[:id]%>" title="invited and Rejected">
+													<%end%>
+												<%else%>
+													<img src="/images/invited_for_prog.gif" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="$('#accept_decline_inv_div_'+<%=each_schedule[:id]%>).slideDown(1000);" title="Accept / Decline Invitation for <%=each_schedule[:programme_name]%>">
+	
+													<div id="accept_decline_inv_div_<%=each_schedule[:id]%>" style="display:none;position:absolute;padding-left:30px;padding-bottom:100px;">
+													  <img src="/images/schedule/acc_rej_inv_grn_red.gif" border=0 usemap="#AcceptRejectMap_<%=each_schedule[:id]%>">
+													  <map name="AcceptRejectMap_<%=each_schedule[:id]%>">
+													    <%if i%2 == 1%>
+														  	<area shape="circle" coords="20,16,10" onclick="accept_reject_invitation('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_1','in_volunteer','accept','');" title="Accept this Invitation for <%=each_schedule[:programme_name]%>" onmouseover="this.style.cursor='pointer';"></area>
+														  	<area shape="circle" coords="55,16,10" onclick="accept_reject_invitation('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_1','in_volunteer','reject','');" title="Reject this Invitation for <%=each_schedule[:programme_name]%>" onmouseover="this.style.cursor='pointer';"></area>
+														<%else%>
+														  	<area shape="circle" coords="20,16,10" onclick="accept_reject_invitation('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_2','in_volunteer','accept','');" title="Accept this Invitation for <%=each_schedule[:programme_name]%>" onmouseover="this.style.cursor='pointer';"></area>
+														  	<area shape="circle" coords="55,16,10" onclick="accept_reject_invitation('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_2','in_volunteer','reject','');" title="Reject this Invitation for <%=each_schedule[:programme_name]%>" onmouseover="this.style.cursor='pointer';"></area>
+														<%end%>
+													  	<area shape="rect" coords="55,0,75,10" onclick="$('#accept_decline_inv_div_<%=each_schedule[:id]%>').slideUp(1000);" title="Close" onmouseover="this.style.cursor='pointer';"></area>
+													  </map>
+													</div><br>
+												<%end%>
+											  <%elsif each_schedule[:user_message] == "Rejected by Admin"%>
+											  	<img src="/images/schedule/rejected_by_admin.gif" border=0 title="Rejected by Admin" onmouseover="this.style.cursor='pointer';">
+											  <%else%>
+												  <%if each_schedule[:user_is_volunteer]%>
+												    <%if i%2 == 1%>
+														<img src="/images/reject.png" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_1','in_volunteer');" title="Un-Register for <%=each_schedule[:programme_name]%>">
+													<%else%>
+														<img src="/images/reject.png" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_2','in_volunteer');" title="Un-Register for <%=each_schedule[:programme_name]%>">
+													<%end%>
+												  <%else%>
+												    <%if i%2 == 1%>
+														<img src="/images/approve.png" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_1','volunteer');" title="Register for <%=each_schedule[:programme_name]%>">
+													<%else%>
+														<img src="/images/approve.png" style="cursor:pointer" id="volunteer_schedule_<%=each_schedule[:id]%>" onclick="volunteer_for_this_schedule('<%=each_schedule[:id]%>','<%=each_schedule[:programme_name]%>','schedule_tr_2','volunteer');" title="Register for <%=each_schedule[:programme_name]%>">
+													<%end%>
+												  <%end%><br>
+											  <%end%>
+										  <%end%>
+										  
+										<%else%>
+										  <img src="/images/not_approved.gif" title="User Not Yet Approved by Administrator">
+										<%end%>
+									  </div>
+						  			  <%if each_schedule[:user_is_volunteer] or each_schedule[:user_message] == "Invited and Volunteered"%>
+									    <div id="volunteered_message_<%=each_schedule[:id]%>" class="active_user_message_class">
+									  <%else%>
+									      <%if i%2 == 1%>
+										    <div id="volunteered_message_<%=each_schedule[:id]%>" class="user_message_class_2">
+										  <%else%>
+										    <div id="volunteered_message_<%=each_schedule[:id]%>" class="user_message_class_2">
+										  <%end%>
+								      <%end%>
+									  	<%=each_schedule[:user_message]%>
+									  </div>
+									</td>
+								<%end%>
+							  </div>
+							</tr>
+							<tr><td colspan=6>
+								<img src="/images/schedule_row_bottom.gif" border=0 width="800px">
+							</td></tr>
+							<%i = i+1%>
+						<%end%>
+					  </div>

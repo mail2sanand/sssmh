@@ -1,0 +1,68 @@
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>
+			<%= @title ? @title : "Sri Sathya Sai Mobile Hospital Website"%>
+		</title>
+	
+	 	<%=javascript_include_tag 'jquery'%>
+	 	<%=javascript_include_tag 'jquery.form'%>
+	 	<%=javascript_include_tag 'jquery-ui'%>
+		
+		<%= stylesheet_link_tag "demos"%>
+		
+	 	<%= stylesheet_link_tag "jquery-ui"%>
+	 	<%=javascript_include_tag 'jquery.multiselect2side'%>
+	   	<%=stylesheet_link_tag "jquery.multiselect2side"%>
+	
+	 	<%=javascript_include_tag 'account_info'%>
+	 	<%= stylesheet_link_tag "ms_project_css"%>
+	
+	 	<%=javascript_include_tag 'anima_drag'%>
+	 	<%=javascript_include_tag 'jquery.anchor'%>
+	 	<%=javascript_include_tag 'eye'%>
+	 	<%=javascript_include_tag 'utils'%>
+	 	<%=javascript_include_tag 'zoomimage'%>
+	 	<%=javascript_include_tag 'jquery.tools.min'%>
+	 	<%=javascript_include_tag 'jquery.easing'%>
+		<%=javascript_include_tag 'jquery.rating'%>
+		<%=javascript_include_tag 'jquery.anythingslider.fx.min'%>
+		<%=javascript_include_tag 'jquery.anythingslider'%>
+		
+		<%= stylesheet_link_tag "anythingslider"%>
+		<%= stylesheet_link_tag "jquery.rating"%>
+		
+	 	<%= stylesheet_link_tag "scrollable"%>
+		
+	 	<%= stylesheet_link_tag "home"%>
+	
+		<%= @content_for_head %>
+	
+		<script type="text/javascript">
+	
+		</script>
+	
+	</head>
+	
+	<body>
+	
+	  <table border="0" class="doctor_layout" align="center" width="900px"><tr valign="top"><td>
+	<!--  	<img src="/images/sssmh_logo1.jpg" border=0> -->
+		<div id="message" style="display:none"></div>
+	
+		<div id="first_page" style="display:none" align="center">
+			<%=@content_for_layout%><br><br>
+		</div>
+	  </td></tr>
+	  <tr>
+	    <td height="24" bgcolor="#0038A9"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+	      <tr>
+	        <td width="50%"><!--&nbsp;&nbsp;<span class="txtwhite"><a href="feedback.htm" class="archives">Feedback</a> </span>--></td>
+	        <td width="50%" align="right" style="padding-right:5px;" class="txtwhite">Copyright &copy; 2012 Sri Sathya Sai Central Trust</td>
+	      </tr>
+	    </table></td>
+	  </tr>
+	  </table>
+	</body>
+</html>

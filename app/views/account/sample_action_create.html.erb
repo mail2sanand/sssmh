@@ -1,0 +1,6 @@
+
+<% remote_form_for(:user,:html => {:method => :post, :multipart => true, :id => "sample_action_id"}) do |f| %>
+	Upload File : <input type="file" name="sample_form[upload_file]"/></br>
+	Description : <input type="text" name="sample_form[sample_text]"/></br>
+	<input type="submit" id="form_submit_button" value="Submit This ...">
+<% end %>

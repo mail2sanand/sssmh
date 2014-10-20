@@ -1,0 +1,96 @@
+<%if @from_where == 'admin'%>
+
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").slideUp(750);
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").html("");
+	
+	$("#update_volunteers_details_<%=@schedule_id%>").slideUp(1000);
+	$("#update_volunteers_details_<%=@schedule_id%>").html("");
+	$("#update_volunteers_details_<%=@schedule_id%>").html("<%= escape_javascript(render :partial => "/schedule/volunteer_invite_partial", :locals => {:users_volunteered_for_this_schedule => @users_volunteered_for_this_schedule, :users_invited_for_this_schedule => @users_invited_for_this_schedule, :programme_name => @programme_name, :schedule_id => @schedule_id, :volunteer_message => "Doctors Volunteered for '#{@programme_name}' programme", :page_for => 'display_volunteered_docs',:end_date => @end_date,:user_specializations => @non_volunteered_user_specializations})%>");
+	$("#update_volunteers_details_<%=@schedule_id%>").slideDown(1000);
+
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").html("<%= escape_javascript(render :partial => '/schedule/volunteer_invite_partial', :locals => {:users_volunteered_for_this_schedule => @non_volunteered_docs, :programme_name => @programme_name, :schedule_id => @schedule_id, :volunteer_message => "Non-Volunteered Doctors for '#{@programme_name}' programme", :page_for => 'display_un_volunteered_docs',:user_specializations => @user_specializations})%>");
+	$("#non_volunteered_docs_for_<%=@schedule_id%>").slideDown(1000);
+  
+<%else%>
+
+	$("#volunteered_message_<%=@schedule_id%>").html("");
+	
+	$("#all_schedules_message").html("<%=@message%>");
+	$("#all_schedules_message").slideDown(1000);
+	$("#all_schedules_message").fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+	
+	  $("#schedule_div_<%=@schedule_id%>").slideUp(1000);
+	
+	  $("#volunteer_image_div_<%=@schedule_id%>").html("");
+	   
+	<%if @message =~ /un-registered/%>
+	  $(document.createElement("img"))
+	  .attr({src:'/images/approve.png',title:'Register for <%=@programme_name%>'})
+	  .addClass('schedule_image_pointer_class')
+	  .appendTo("#volunteer_image_div_<%=@schedule_id%>")
+	  .click(function(){
+		volunteer_for_this_schedule('<%=@schedule_id%>','<%=@programme_name%>','<%=@background_class%>','volunteer');
+	  });
+	  
+	  $("#schedule_tr_<%=@schedule_id%>").removeClass('volunteer_schedule_tr');
+	  $("#schedule_tr_<%=@schedule_id%>").addClass('<%=@background_class%>');
+	  $("#schedule_div_<%=@schedule_id%>").fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+	  
+	<%elsif @message =~ /declined/%>
+	
+	  $(document.createElement("img"))
+	  .attr({src:'/images/schedule/i_&_r.png',title:'Declined Invitation for <%=@programme_name%>'})
+	  .addClass('schedule_image_pointer_class')
+	  .appendTo("#volunteer_image_div_<%=@schedule_id%>");
+	
+	  $("#schedule_tr_<%=@schedule_id%>").removeClass('volunteer_schedule_tr');
+	  $("#schedule_tr_<%=@schedule_id%>").addClass('<%=@background_class%>');
+	  $("#schedule_div_<%=@schedule_id%>").slideDown(1000);
+	  $("#volunteered_message_<%=@schedule_id%>").html("Invited and Rejected");
+	
+	  message_class = $("#volunteered_message_<%=@schedule_id%>").attr("class");
+	  
+	  $("#volunteered_message_<%=@schedule_id%>").removeClass(message_class);
+	  $("#volunteered_message_<%=@schedule_id%>").addClass('user_message_class_2');
+	
+	<%elsif @message =~ /accepted/%>
+	
+	  $(document.createElement("img"))
+	  .attr({src:'/images/schedule/i_&_a.png',title:'Accepted Invitation for <%=@programme_name%>'})
+	  .addClass('schedule_image_pointer_class')
+	  .appendTo("#volunteer_image_div_<%=@schedule_id%>");
+	
+	  $("#volunteered_message_<%=@schedule_id%>").html("Invited and Volunteered");
+	
+	  message_class = $("#volunteered_message_<%=@schedule_id%>").attr("class");
+	  
+	  $("#volunteered_message_<%=@schedule_id%>").removeClass(message_class);
+	  $("#volunteered_message_<%=@schedule_id%>").addClass('active_user_message_class');
+	
+	  $("#schedule_tr_<%=@schedule_id%>").removeClass('<%=@background_class%>');
+	  $("#schedule_tr_<%=@schedule_id%>").addClass('volunteer_schedule_tr');
+	  $("#schedule_div_<%=@schedule_id%>").slideDown(1000);
+	  
+	<%else%>
+	  $(document.createElement("img"))
+	  .attr({src:'/images/reject.png',title:'Click to Un-Register from the programme <%=@programme_name%>'})
+	  .addClass('schedule_image_pointer_class')
+	  .appendTo("#volunteer_image_div_<%=@schedule_id%>")  
+	  .click(function(){
+		volunteer_for_this_schedule('<%=@schedule_id%>','<%=@programme_name%>','<%=@background_class%>','in_volunteer');
+	  });
+	  
+	  $("#volunteered_message_<%=@schedule_id%>").html("Waiting for Admin's Approval");
+	 
+	  message_class = $("#volunteered_message_<%=@schedule_id%>").attr("class");
+	  
+	  $("#volunteered_message_<%=@schedule_id%>").removeClass(message_class);
+	  $("#volunteered_message_<%=@schedule_id%>").addClass('active_user_message_class');
+	
+	  $("#schedule_tr_<%=@schedule_id%>").removeClass('<%=@background_class%>');
+	  $("#schedule_tr_<%=@schedule_id%>").addClass('volunteer_schedule_tr');
+	  $("#schedule_div_<%=@schedule_id%>").slideDown(1000);
+	  
+	<%end%>
+
+<%end%>

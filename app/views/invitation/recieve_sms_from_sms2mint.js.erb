@@ -1,0 +1,11 @@
+<%if @deleted_sms %>
+	alert("<%=@deleted_sms%> SMSs deleted");
+<%else%>
+	alert("No Messages were found to be deleted ... ");
+<%end%>
+
+<%if @processed_sms %>
+	alert("<%=@processed_sms%> SMSs processed");
+<%else%>
+	alert("No Messages were found to be processed ... ");
+<%end%>
